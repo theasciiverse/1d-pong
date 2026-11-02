@@ -1,10 +1,13 @@
 mod app;
+mod audio;
 mod cpu;
+mod font;
 mod game;
 mod render;
 mod rng;
+mod store;
 
-use app::{App, Mode, DT};
+use app::{App, Mode, Screen, DT};
 use game::Side;
 use ratatui::crossterm::event::{
     self, DisableFocusChange, EnableFocusChange, Event, KeyCode, KeyEvent, KeyEventKind, KeyModifiers, KeyboardEnhancementFlags,
@@ -18,21 +21,22 @@ use std::time::{Duration, Instant, SystemTime};
 const FRAME: Duration = Duration::from_micros(16_667);
 const SNAPSHOT_EVERY: Duration = Duration::from_millis(500);
 
-const HELP: &str = "1d-pong [--cpu easy|normal|hard|king] [--two] [--watch] [--to N] [--seed N]
+const HELP: &str = "1d-pong [--to N] [--cpu easy|normal|hard|king] [--two] [--watch] [--mute] [--seed N]
 
 Pong with one dimension. The court is a single line; each side has a hit
 zone at its end. Press when the ball is in your zone to send it back: the
 later you hit it, the faster it goes. Miss and the point is theirs. Press
 outside the zone and you are locked out for a moment.
 
-One player:  SPACE (or A, Z, ←, ENTER) hits; you are on the left
-Two players: left A (or Z, S, X, ←), right L (or K, ENTER, →); or two gamepads
-P pauses, Q or ESC quits
+One player:  SPACE (or A, Z, ←) hits
+Two players: left A (or Z, S, X), right L (or K, ENTER, →); or two gamepads
+P pauses, M mutes, ESC goes back to the menu, Q quits from the menu
 
-  --cpu NAME  the computer you play against (default normal)
-  --two       two players
-  --watch     the computer plays itself
   --to N      points to win a match (1 to 21, default 7)
+  --cpu NAME  start a one-player match right away against this computer
+  --two       start a two-player match right away
+  --watch     start with the computer playing itself
+  --mute      no sound
   --seed N    fixed random seed
 
 Logging: RUST_LOG=debug 1d-pong 2>1d-pong.log
@@ -59,25 +63,30 @@ fn main() -> io::Result<()> {
             std::process::exit(2);
         }
     };
-    let skill = match after("--cpu") {
-        None => cpu::Skill::Normal,
-        Some(name) => cpu::Skill::parse(&name).unwrap_or_else(|| {
+    let start_cpu = match after("--cpu") {
+        None => None,
+        Some(name) => Some(cpu::Skill::parse(&name).unwrap_or_else(|| {
             eprintln!("--cpu takes easy, normal, hard or king");
             std::process::exit(2);
-        }),
-    };
-    let mode = if has("--two") {
-        Mode::Duo
-    } else if has("--watch") {
-        Mode::Watch
-    } else {
-        Mode::Solo(skill)
+        })),
     };
     let seed = after("--seed")
         .and_then(|v| v.parse().ok())
         .unwrap_or_else(|| SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).map_or(1, |d| d.as_nanos() as u64));
-    log::info!("start version {} mode {mode:?} target {target} seed {seed}", env!("CARGO_PKG_VERSION"));
-    let mut app = App::new(mode, target, seed);
+
+    // open audio before the alternate screen, so any ALSA chatter lands above it
+    let audio = audio::Audio::new(has("--mute"));
+    let store = store::Store::load();
+    log::info!("start version {} audio {} muted {} seed {seed} target {target} store {store:?}", env!("CARGO_PKG_VERSION"), audio.available(), audio.muted);
+    let mut app = App::new(audio, store, target, seed);
+    if let Some(skill) = start_cpu {
+        app.skill = skill;
+        app.start(Mode::Solo(skill));
+    } else if has("--two") {
+        app.start(Mode::Duo);
+    } else if has("--watch") {
+        app.start(Mode::Watch);
+    }
 
     let mut terminal = ratatui::init();
     let kitty = supports_keyboard_enhancement().unwrap_or(false);
@@ -98,10 +107,18 @@ fn main() -> io::Result<()> {
     result
 }
 
+/// What a key or button means, before it reaches the app.
 #[derive(Clone, Copy, Debug, PartialEq)]
 enum Cmd {
     Hit(Side),
+    Up,
+    Down,
+    Left,
+    Right,
+    Confirm,
     Pause,
+    Mute,
+    Back,
     Quit,
 }
 
@@ -129,13 +146,13 @@ fn run(terminal: &mut ratatui::DefaultTerminal, app: &mut App, pads: &mut Pads) 
             match event::read()? {
                 Event::Key(k) => {
                     log::debug!("key {:?} {:?} {:?}", k.code, k.kind, k.modifiers);
-                    if let Some(cmd) = key_cmd(app.mode, k) {
+                    if let Some(cmd) = key_cmd(app, k) {
                         apply(app, cmd);
                     }
                 }
                 Event::Resize(w, h) => log::info!("resize {w}x{h}"),
                 Event::FocusLost => {
-                    if app.mode != Mode::Watch && !app.paused && app.over_for().is_none() {
+                    if app.screen == Screen::Play && app.play.as_ref().is_some_and(|m| m.mode != Mode::Watch) && !app.paused {
                         app.paused = true;
                         log::info!("focus lost, paused");
                     }
@@ -144,7 +161,7 @@ fn run(terminal: &mut ratatui::DefaultTerminal, app: &mut App, pads: &mut Pads) 
                 _ => {}
             }
         }
-        for cmd in pads.poll(app.mode) {
+        for cmd in pads.poll(app) {
             advance(app, &mut last, &mut acc);
             apply(app, cmd);
         }
@@ -166,24 +183,44 @@ fn run(terminal: &mut ratatui::DefaultTerminal, app: &mut App, pads: &mut Pads) 
     }
 }
 
-fn key_cmd(mode: Mode, k: KeyEvent) -> Option<Cmd> {
+fn key_cmd(app: &App, k: KeyEvent) -> Option<Cmd> {
     // only fresh presses: a held key's repeats would whiff
     if k.kind != KeyEventKind::Press {
         return None;
     }
-    if k.modifiers.contains(KeyModifiers::CONTROL) && k.code == KeyCode::Char('c') {
+    if k.modifiers.contains(KeyModifiers::CONTROL) && matches!(k.code, KeyCode::Char('c')) {
         return Some(Cmd::Quit);
     }
     let ch = match k.code {
         KeyCode::Char(c) => Some(c.to_ascii_lowercase()),
         _ => None,
     };
+    if ch == Some('m') {
+        return Some(Cmd::Mute);
+    }
+    if app.screen == Screen::Title {
+        return match (k.code, ch) {
+            (KeyCode::Up, _) | (_, Some('w')) | (_, Some('k')) => Some(Cmd::Up),
+            (KeyCode::Down, _) | (_, Some('s')) | (_, Some('j')) => Some(Cmd::Down),
+            (KeyCode::Left, _) | (_, Some('a')) | (_, Some('h')) => Some(Cmd::Left),
+            (KeyCode::Right, _) | (_, Some('d')) | (_, Some('l')) => Some(Cmd::Right),
+            (KeyCode::Enter, _) | (_, Some(' ')) => Some(Cmd::Confirm),
+            (_, Some('1')) => {
+                Some(Cmd::Confirm).filter(|_| app.menu == 0).or(Some(Cmd::Up)).map(|_| Cmd::Hit(Side::Left)).map(|_| Cmd::Confirm)
+            }
+            (KeyCode::Esc, _) | (_, Some('q')) => Some(Cmd::Quit),
+            _ => None,
+        };
+    }
+    let Some(m) = app.play.as_ref() else { return None };
+    let over = m.over_for().is_some();
     match (k.code, ch) {
-        (KeyCode::Esc, _) | (_, Some('q')) => return Some(Cmd::Quit),
+        (KeyCode::Esc, _) => return Some(Cmd::Back),
         (_, Some('p')) => return Some(Cmd::Pause),
+        (_, Some('q')) if over || app.paused || m.mode == Mode::Watch => return Some(Cmd::Quit),
         _ => {}
     }
-    match mode {
+    match m.mode {
         Mode::Solo(_) => match (k.code, ch) {
             (KeyCode::Left | KeyCode::Enter, _) | (_, Some(' ' | 'a' | 'z' | 's' | 'x')) => Some(Cmd::Hit(Side::Left)),
             _ => None,
@@ -191,6 +228,8 @@ fn key_cmd(mode: Mode, k: KeyEvent) -> Option<Cmd> {
         Mode::Duo => match (k.code, ch) {
             (KeyCode::Left, _) | (_, Some('a' | 'z' | 's' | 'x')) => Some(Cmd::Hit(Side::Left)),
             (KeyCode::Right | KeyCode::Enter, _) | (_, Some('l' | 'k' | ',' | '.')) => Some(Cmd::Hit(Side::Right)),
+            // space only rematches, it belongs to neither player
+            (_, Some(' ')) if over => Some(Cmd::Hit(Side::Left)),
             _ => None,
         },
         Mode::Watch => None,
@@ -201,8 +240,18 @@ fn apply(app: &mut App, cmd: Cmd) {
     log::debug!("cmd {cmd:?}");
     match cmd {
         Cmd::Quit => app.quit = true,
+        Cmd::Mute => {
+            app.audio.muted = !app.audio.muted;
+            log::info!("muted {}", app.audio.muted);
+        }
+        Cmd::Up => app.menu_move(-1),
+        Cmd::Down => app.menu_move(1),
+        Cmd::Left => app.skill_move(-1),
+        Cmd::Right => app.skill_move(1),
+        Cmd::Confirm => app.menu_pick(),
+        Cmd::Back => app.to_title(),
         Cmd::Pause => {
-            if app.over_for().is_none() {
+            if app.play.as_ref().is_some_and(|m| m.over_for().is_none()) {
                 app.paused = !app.paused;
                 log::info!("paused {}", app.paused);
             }
@@ -212,8 +261,7 @@ fn apply(app: &mut App, cmd: Cmd) {
 }
 
 /// Gamepads: the first pad to press a button is the left player, the
-/// second the right. In a one-player game every pad plays the left side.
-/// Any face, shoulder or d-pad button hits; Start pauses.
+/// second the right. In one-player games every pad plays the left side.
 struct Pads {
     #[cfg(feature = "gamepad")]
     gilrs: Option<gilrs::Gilrs>,
@@ -239,12 +287,12 @@ impl Pads {
     }
 
     #[cfg(not(feature = "gamepad"))]
-    fn poll(&mut self, _mode: Mode) -> Vec<Cmd> {
+    fn poll(&mut self, _app: &App) -> Vec<Cmd> {
         Vec::new()
     }
 
     #[cfg(feature = "gamepad")]
-    fn poll(&mut self, mode: Mode) -> Vec<Cmd> {
+    fn poll(&mut self, app: &App) -> Vec<Cmd> {
         use gilrs::{Button, EventType};
         let mut out = Vec::new();
         let Some(g) = &mut self.gilrs else { return out };
@@ -257,19 +305,20 @@ impl Pads {
                 }
                 EventType::ButtonPressed(b, _) => {
                     log::debug!("pad {:?} button {b:?}", ev.id);
-                    // gilrs also reports 3D mice and tablet key pads as
-                    // gamepads; only trust the ones SDL knows
-                    let any = std::env::var("ONE_D_PONG_ANY_PAD").is_ok_and(|v| v == "1");
-                    if !any && g.gamepad(ev.id).mapping_source() != gilrs::MappingSource::SdlMappings {
-                        continue;
-                    }
                     if !self.order.contains(&ev.id) {
                         self.order.push(ev.id);
                     }
                     let seat = self.order.iter().position(|&id| id == ev.id).unwrap_or(0);
-                    let side = if mode == Mode::Duo && seat % 2 == 1 { Side::Right } else { Side::Left };
-                    match b {
-                        Button::Start => out.push(Cmd::Pause),
+                    let title = app.screen == Screen::Title;
+                    let cmd = match b {
+                        Button::DPadUp if title => Some(Cmd::Up),
+                        Button::DPadDown if title => Some(Cmd::Down),
+                        Button::DPadLeft if title => Some(Cmd::Left),
+                        Button::DPadRight if title => Some(Cmd::Right),
+                        Button::South | Button::Start if title => Some(Cmd::Confirm),
+                        Button::East if title => Some(Cmd::Quit),
+                        Button::Start => Some(Cmd::Pause),
+                        Button::Select => Some(Cmd::Back),
                         Button::South
                         | Button::East
                         | Button::West
@@ -281,9 +330,16 @@ impl Pads {
                         | Button::DPadUp
                         | Button::DPadDown
                         | Button::DPadLeft
-                        | Button::DPadRight => out.push(Cmd::Hit(side)),
-                        _ => {}
-                    }
+                        | Button::DPadRight => {
+                            let side = match app.play.as_ref().map(|m| m.mode) {
+                                Some(Mode::Duo) if seat % 2 == 1 => Side::Right,
+                                _ => Side::Left,
+                            };
+                            Some(Cmd::Hit(side))
+                        }
+                        _ => None,
+                    };
+                    out.extend(cmd);
                 }
                 _ => {}
             }

@@ -70,6 +70,14 @@ impl Grade {
             Grade::Early
         }
     }
+    pub fn word(self) -> &'static str {
+        match self {
+            Grade::Early => "early",
+            Grade::Good => "good",
+            Grade::Great => "GREAT",
+            Grade::Smash => "SMASH!",
+        }
+    }
 }
 
 #[derive(Clone, Copy, PartialEq, Debug)]
