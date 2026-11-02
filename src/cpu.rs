@@ -17,6 +17,15 @@ pub enum Skill {
 impl Skill {
     pub const ALL: [Skill; 4] = [Skill::Easy, Skill::Normal, Skill::Hard, Skill::King];
 
+    pub fn name(self) -> &'static str {
+        match self {
+            Skill::Easy => "EASY",
+            Skill::Normal => "NORMAL",
+            Skill::Hard => "HARD",
+            Skill::King => "KING OF LINELAND",
+        }
+    }
+
     pub fn key(self) -> &'static str {
         match self {
             Skill::Easy => "easy",

@@ -3,7 +3,7 @@
 Pong with one dimension, for the Asciiverse catalog. Rust + Ratatui.
 Started 2026-11-02 (David: "We NEED an AWESOME 1D pong game!").
 
-**Status:** 0.1.0, playable. Own git repo, folder `games/1d-pong`.
+**Status:** 0.2.0, playable, fleshed out. Own git repo, folder `games/1d-pong`.
 Crate `one-d-pong` (Cargo package names can't start with a digit),
 binary `1d-pong`. What comes next is in `ROADMAP.md`.
 
@@ -19,8 +19,9 @@ written from scratch.
 
 "Just the line, for a little while, and then gradually add things." The
 whole screen is one row: score, post, line, post, score. Every addition
-gets played before the next one goes in. Keep it that way: don't put
-several roadmap steps in at once.
+gets played before the next one goes in. Later the same day David said
+"Flesh it out!", and the fuller draft came back as 0.2.0. The pure view
+stays in the game: V or `--pure` shows just the line again.
 
 ## Rules (src/game.rs)
 
@@ -55,5 +56,6 @@ a press counts on the tick it happened in, not at the next frame.
 
 - gilrs reports 3D mice (David's SpaceMouse) as gamepads; only pads with
   SDL mappings are used, `ONE_D_PONG_ANY_PAD=1` allows all
-- The 2026-11-02 fuller draft (title, menu, sound, glow, big font) is on
-  the `full-draft` branch, the source for later roadmap steps
+- Sounds are synthesised in src/audio.rs (square, triangle and noise),
+  no sound files
+- Settings and the best rally live in $XDG_DATA_HOME/1d-pong/state

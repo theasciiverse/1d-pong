@@ -17,15 +17,19 @@ for the steps below, not a plan to restore it all at once.
 - One player against the computer (easy, normal, hard, king), two players, watch
 - Keyboard and gamepads; session logging
 
-## Next, one at a time
+## 0.2.0: fleshed out (2026-11-02)
 
-- Sound: hit blips that climb with speed, a smash, a whiff, points and the win
-- The ball's colour heating from green through amber to red as rallies speed up
-- A trail behind the ball
-- Light leaking out of the line around the ball (half blocks above and below)
-- Grades for each hit (early, good, great, smash)
-- Big scores and a title screen with the menu
+- Sound, all synthesised: hit blips that climb with speed, smash, whiff, serve, points, win and loss
+- The ball heats from green through amber and red to white hot as rallies speed up
+- A trail behind the ball, and its light leaking out of the line in half blocks
+- Grades for each hit (early, good, GREAT, SMASH!), a shake on smashes and points
+- Big block scores, a rally counter with a speed meter
+- Title screen with the computer playing itself behind the menu
 - Best rally and beating the King of Lineland, remembered between runs
+- The pure view stays: V (or `--pure`) switches back to just the line, and it is remembered
+
+## Next
+
 - Lineland: a story mode after Abbott's Flatland, a companion to the Flatland movie
 - Things on the line: blocks, a ghost ball, a split ball, a moving middle wall
 - LAN play over iroh

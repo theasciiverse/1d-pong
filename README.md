@@ -21,7 +21,8 @@ cargo run --release -- --help    # everything else
 ```
 
 One player: SPACE hits (A, Z, ← and ENTER too). Two players: left A,
-right L, or two gamepads. P pauses, Q or ESC quits.
+right L, or two gamepads. P pauses, M mutes, ESC goes back to the menu.
+V switches to the pure view, just the line and nothing else, and back.
 
 The computer comes in four strengths: `--cpu easy`, `normal` (default),
 `hard` and `king`, the King of Lineland.
