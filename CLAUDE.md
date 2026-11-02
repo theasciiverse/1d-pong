@@ -3,7 +3,7 @@
 Pong with one dimension, for the Asciiverse catalog. Rust + Ratatui.
 Started 2026-11-02 (David: "We NEED an AWESOME 1D pong game!").
 
-**Status:** 0.3.0, playable, fleshed out. Own git repo, private at
+**Status:** 0.4.0, playable, fleshed out. Own git repo, private at
 github.com/theasciiverse/1d-pong, folder `games/1d-pong`.
 Crate `one-d-pong` (Cargo package names can't start with a digit),
 binary `1d-pong`. What comes next is in `ROADMAP.md`.
@@ -47,14 +47,21 @@ strength, the spread growing with speed. Aim past 1 and the ball gets by;
 aim before the zone and it whiffs, gets locked out, and aims deeper.
 King against King rallies run to 20 and more.
 
-## Paddles and impact (0.3.0, David's ask)
+## One line (0.4.0, David)
 
-The hit zone is the paddle: in one dimension its only width is its length
-along the line, so it is drawn as a solid bar exactly as long as the zone
-(`█` on the line with `▄`/`▀` caps), the smash spot (depth 0.92 and over)
-brighter. Drawing only; the rules didn't change. On a hit the game holds
-still for a hit stop (src/app.rs `hit_stop`, longer the better the hit)
-and sparks fly (`Fx::burst`). Hit stop is off in the pure view.
+"The whole game area should just be one straight line", drawn in half
+blocks (`▀`), with a colour at each end that moves toward the ball with a
+bump and back, and the ball, the brightest colour, going back and forth.
+Everything in the court happens on that one row: the line (dim green),
+the paddles (left amber, right cyan, each as long as its hit zone, so
+the leader's visibly shrinks), the ball (near white), its trail and the
+sparks of a hit, which light the line up rather than fly off it. Every
+press bumps the paddle toward the ball (`since_press` in the game,
+`BUMP_OUT`/`BUMP_BACK` in render.rs), whiffs too. The HUD around it (big
+scores, grades, rally meter) is not the court and stays.
+
+On a hit the game holds still for a hit stop (src/app.rs `hit_stop`,
+longer the better the hit). Hit stop is off in the pure view.
 
 ## Timing
 

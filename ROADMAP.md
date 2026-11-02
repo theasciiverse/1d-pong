@@ -37,6 +37,19 @@ when David said to flesh it out.
 - Sparks off every hit, more and further the better the hit, and a red burst from the post on a point
 - The ball drawn round (●) so it never looks like part of a paddle
 
+## 0.4.0: one line (2026-11-02)
+
+David: the whole game area should be just one straight line, in half blocks, with a colour at
+each end that moves toward the ball with a bump and back, and the ball, the brightest colour,
+going back and forth along it.
+
+- The court is one row of `▀`: dim green line, amber paddle on the left, cyan on the right,
+  each as long as its hit zone; the ball is the brightest thing on it
+- Every press bumps the paddle toward the ball (about a twentieth of the line, out in 50 ms,
+  back in 170 ms), whiffs included; a hit flashes it, a lockout dims it, a lost point blinks it red
+- The trail and the sparks stay on the line, lighting it up; the glow rows, paddle caps,
+  posts and flying sparks of 0.3.0 are gone
+
 ## Next
 
 - Rally milestones (10, 20, 30 hits): a banner, a sound, the line starting to glow

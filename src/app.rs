@@ -104,7 +104,7 @@ impl Fx {
             s.vy *= drag;
             s.life -= DT;
         }
-        self.sparks.retain(|s| s.life > 0.0 && (0.0..=1.0).contains(&s.x) && s.y.abs() < 4.0);
+        self.sparks.retain(|s| s.life > 0.0 && (0.0..=1.0).contains(&s.x));
     }
 }
 

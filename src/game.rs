@@ -111,6 +111,8 @@ pub struct Game {
     pub best_rally: u32,
     /// Seconds since each side last hit the ball (for the zone flash).
     pub since_hit: [f32; 2],
+    /// Seconds since each side last pressed (for the paddle's bump).
+    pub since_press: [f32; 2],
     pub last_grade: [Option<Grade>; 2],
     /// Recent ball positions, newest first, one per tick.
     pub trail: VecDeque<f32>,
@@ -129,6 +131,7 @@ impl Game {
             rally: 0,
             best_rally: 0,
             since_hit: [9.0; 2],
+            since_press: [9.0; 2],
             last_grade: [None; 2],
             trail: VecDeque::new(),
             events: Vec::new(),
@@ -177,11 +180,15 @@ impl Game {
     pub fn press(&mut self, side: Side) {
         let i = side.idx();
         match self.phase {
-            Phase::Serve { server, t } if server == side && t >= 0.35 => self.serve(side),
+            Phase::Serve { server, t } if server == side && t >= 0.35 => {
+                self.since_press[i] = 0.0;
+                self.serve(side);
+            }
             Phase::Rally => {
                 if self.lockout[i] > 0.0 {
                     return;
                 }
+                self.since_press[i] = 0.0;
                 let d = self.depth(side);
                 if self.incoming(side) && (0.0..=1.0).contains(&d) {
                     self.hit(side, d);
@@ -221,7 +228,7 @@ impl Game {
         for l in &mut self.lockout {
             *l = (*l - dt).max(0.0);
         }
-        for s in &mut self.since_hit {
+        for s in self.since_hit.iter_mut().chain(self.since_press.iter_mut()) {
             *s += dt;
         }
         match &mut self.phase {
