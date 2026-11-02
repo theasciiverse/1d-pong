@@ -21,7 +21,7 @@ use std::time::{Duration, Instant, SystemTime};
 const FRAME: Duration = Duration::from_micros(16_667);
 const SNAPSHOT_EVERY: Duration = Duration::from_millis(500);
 
-const HELP: &str = "1d-pong [--to N] [--cpu easy|normal|hard|king] [--two] [--watch] [--mute] [--pure] [--seed N]
+const HELP: &str = "1d-pong [--to N] [--cpu easy|normal|hard|king] [--two] [--watch] [--mute] [--pure] [--unfold N] [--seed N]
 
 Pong with one dimension. The court is a single line; each side has a hit
 zone at its end. Press when the ball is in your zone to send it back: the
@@ -33,6 +33,10 @@ Two players: left A (or Z, S, X), right L (or K, ENTER, →); or two gamepads
 P pauses, M mutes, V switches to the pure view (just the line) and back,
 ESC goes back to the menu, Q quits from the menu
 
+The game starts bare, just the line, and unfolds as you play: sound,
+the score, the trail, impact, the whole game with its menu, the King of
+Lineland, and one more thing. How far it has unfolded is remembered.
+
   --to N      points to win a match (1 to 21, default 7)
   --cpu NAME  start a one-player match right away against this computer
   --two       start a two-player match right away
@@ -40,6 +44,8 @@ ESC goes back to the menu, Q quits from the menu
   --mute      no sound
   --pure      just the line: no scores above it, no glow, nothing else
   --seed N    fixed random seed
+  --unfold N  set how far the game has unfolded, 0 (bare) to 7, or all;
+              --unfold 0 starts it over from the bare line
 
 Logging: RUST_LOG=debug 1d-pong 2>1d-pong.log
 ";
@@ -84,6 +90,17 @@ fn main() -> io::Result<()> {
     if has("--pure") {
         app.store.pure = true;
     }
+    if let Some(v) = after("--unfold") {
+        match v.parse::<u8>() {
+            Ok(n) if n <= app::level::MAX => app.set_unfold(n),
+            _ if v == "all" => app.set_unfold(app::level::MAX),
+            _ => {
+                eprintln!("--unfold takes 0 to {} or all", app::level::MAX);
+                std::process::exit(2);
+            }
+        }
+    }
+    log::info!("unfold level {}", app.unfold());
     if let Some(skill) = start_cpu {
         app.skill = skill;
         app.start(Mode::Solo(skill));
@@ -91,6 +108,9 @@ fn main() -> io::Result<()> {
         app.start(Mode::Duo);
     } else if has("--watch") {
         app.start(Mode::Watch);
+    } else if app.unfold() < app::level::FULL {
+        // no title or menu yet: straight onto the line, against the gentlest
+        app.start(Mode::Solo(cpu::Skill::Easy));
     }
 
     let mut terminal = ratatui::init();

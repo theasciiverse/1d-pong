@@ -1,7 +1,8 @@
 //! What carries over between runs: the last difficulty picked, the best
-//! rally, whether the King was beaten, and the pure view. Kept in
-//! $XDG_DATA_HOME/1d-pong/state (~/.local/share/1d-pong/state, or
-//! %APPDATA%\1d-pong\state on Windows) as plain `key=value` lines.
+//! rally, whether the King was beaten, the pure view, and how far the game
+//! has unfolded. Kept in $XDG_DATA_HOME/1d-pong/state
+//! (~/.local/share/1d-pong/state, or %APPDATA%\1d-pong\state on Windows)
+//! as plain `key=value` lines.
 
 use std::path::PathBuf;
 
@@ -11,6 +12,8 @@ pub struct Store {
     pub best_rally: u32,
     pub king_beaten: bool,
     pub pure: bool,
+    /// how far the game has unfolded (app::level)
+    pub unfold: u8,
 }
 
 fn path() -> Option<PathBuf> {
@@ -32,6 +35,7 @@ impl Store {
                 "best_rally" => s.best_rally = v.trim().parse().unwrap_or(0),
                 "king_beaten" => s.king_beaten = v.trim() == "true",
                 "pure" => s.pure = v.trim() == "true",
+                "unfold" => s.unfold = v.trim().parse().unwrap_or(0),
                 _ => {}
             }
         }
@@ -41,11 +45,12 @@ impl Store {
     pub fn save(&self) {
         let Some(p) = path() else { return };
         let text = format!(
-            "skill={}\nbest_rally={}\nking_beaten={}\npure={}\n",
+            "skill={}\nbest_rally={}\nking_beaten={}\npure={}\nunfold={}\n",
             self.skill.as_deref().unwrap_or("normal"),
             self.best_rally,
             self.king_beaten,
-            self.pure
+            self.pure,
+            self.unfold
         );
         let result = p.parent().map_or(Ok(()), std::fs::create_dir_all).and_then(|_| std::fs::write(&p, text));
         if let Err(e) = result {

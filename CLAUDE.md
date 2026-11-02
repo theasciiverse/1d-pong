@@ -3,7 +3,7 @@
 Pong with one dimension, for the Asciiverse catalog. Rust + Ratatui.
 Started 2026-11-02 (David: "We NEED an AWESOME 1D pong game!").
 
-**Status:** 0.4.0, playable, fleshed out. Own git repo, private at
+**Status:** 0.5.0, playable, fleshed out. Own git repo, private at
 github.com/theasciiverse/1d-pong, folder `games/1d-pong`.
 Crate `one-d-pong` (Cargo package names can't start with a digit),
 binary `1d-pong`. What comes next is in `ROADMAP.md`.
@@ -62,6 +62,17 @@ scores, grades, rally meter) is not the court and stays.
 
 On a hit the game holds still for a hit stop (src/app.rs `hit_stop`,
 longer the better the hit). Hit stop is off in the pure view.
+
+## Unfolding (0.5.0, David)
+
+The game starts bare (just the line) and unfolds as you play, the way it
+was built: sound, score, trail, impact, the full game, the King, the
+plane. Levels, triggers and captions are `app::level`; triggers are in
+`App::on_event`, gating in `App::sound`, `App::step` (impact) and
+`render::bare`/`play`. Strictly in order: a trigger only unlocks the
+next level. Watch mode never unlocks. The full table is in ROADMAP.md.
+Testing: `--unfold N` sets and shows a level; tests in app.rs walk the
+whole sequence through `on_event`.
 
 ## Timing
 

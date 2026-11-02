@@ -3,7 +3,7 @@
 //! out of Lineland, a trail that heats up with speed, and a shake when it
 //! counts.
 
-use crate::app::{heat, App, Fx, Match, Mode, Screen, DT, MENU};
+use crate::app::{heat, level, App, Fx, Match, Mode, Screen, DT, MENU};
 use crate::cpu::Skill;
 use crate::font;
 use crate::game::{Game, Grade, Phase, Side};
@@ -128,7 +128,7 @@ fn title(cv: &mut Canvas, app: &App) {
     // the demo match, playing itself
     let x0 = 6.max(w / 8);
     let x1 = w - 1 - x0;
-    court(cv, &app.demo.game, &app.demo.fx, x0, x1, y, true);
+    court(cv, &app.demo.game, &app.demo.fx, x0, x1, y, true, true);
     y += if roomy { 4 } else { 2 };
 
     for (i, item) in MENU.iter().enumerate() {
@@ -162,6 +162,12 @@ fn title(cv: &mut Canvas, app: &App) {
 fn play(cv: &mut Canvas, app: &App, m: &Match) {
     if app.store.pure {
         pure(cv, &m.game);
+        return;
+    }
+    if app.unfold() < level::FULL {
+        let ly = bare(cv, app, m);
+        cv.dx = 0;
+        unfolding(cv, app, ly, true);
         return;
     }
     let (w, h) = (cv.buf.area.width as i32, cv.buf.area.height as i32);
@@ -199,32 +205,9 @@ fn play(cv: &mut Canvas, app: &App, m: &Match) {
     let ly = (h / 2 + 2).min(h - 7);
     let x0 = 4;
     let x1 = w - 5;
-    court(cv, g, &m.fx, x0, x1, ly, false);
+    court(cv, g, &m.fx, x0, x1, ly, false, true);
 
-    // grade popups above the hitter's zone
-    for p in &m.fx.popups {
-        let word = p.grade.word();
-        let zone_mid = match p.side {
-            Side::Left => x0 + ((x1 - x0) as f32 * g.zone(Side::Left) * 0.5) as i32,
-            Side::Right => x1 - ((x1 - x0) as f32 * g.zone(Side::Right) * 0.5) as i32,
-        };
-        let x = (zone_mid - word.len() as i32 / 2).clamp(1, w - 1 - word.len() as i32);
-        let rise = if p.age > 0.35 { 1 } else { 0 };
-        let fade = 1.0 - (p.age / 0.9);
-        let col = match p.grade {
-            Grade::Early => DIM,
-            Grade::Good => GREEN,
-            Grade::Great => AMBER,
-            Grade::Smash => {
-                if (p.age * 20.0) as i32 % 2 == 0 {
-                    HOT
-                } else {
-                    RED
-                }
-            }
-        };
-        cv.text(x, ly - 3 - rise, word, mix(BG, col, fade * 1.3));
-    }
+    popups(cv, g, &m.fx, x0, x1, ly);
 
     // below the line: what's going on
     let info_y = ly + 3;
@@ -295,6 +278,114 @@ fn play(cv: &mut Canvas, app: &App, m: &Match) {
     };
     cv.dx = 0;
     cv.center(h - 1, &help, FAINT);
+    unfolding(cv, app, ly, false);
+}
+
+/// Grade words above the hitter's paddle, rising and fading.
+fn popups(cv: &mut Canvas, g: &Game, fx: &Fx, x0: i32, x1: i32, ly: i32) {
+    let w = cv.buf.area.width as i32;
+    let m_fx = fx;
+    // grade popups above the hitter's zone
+    for p in &m_fx.popups {
+        let word = p.grade.word();
+        let zone_mid = match p.side {
+            Side::Left => x0 + ((x1 - x0) as f32 * g.zone(Side::Left) * 0.5) as i32,
+            Side::Right => x1 - ((x1 - x0) as f32 * g.zone(Side::Right) * 0.5) as i32,
+        };
+        let x = (zone_mid - word.len() as i32 / 2).clamp(1, w - 1 - word.len() as i32);
+        let rise = if p.age > 0.35 { 1 } else { 0 };
+        let fade = 1.0 - (p.age / 0.9);
+        let col = match p.grade {
+            Grade::Early => DIM,
+            Grade::Good => GREEN,
+            Grade::Great => AMBER,
+            Grade::Smash => {
+                if (p.age * 20.0) as i32 % 2 == 0 {
+                    HOT
+                } else {
+                    RED
+                }
+            }
+        };
+        cv.text(x, ly - 3 - rise, word, mix(BG, col, fade * 1.3));
+    }
+
+}
+
+/// The game before it has fully unfolded: the line across the middle and
+/// only what has arrived so far. Returns the line's row.
+fn bare(cv: &mut Canvas, app: &App, m: &Match) -> i32 {
+    let (w, h) = (cv.buf.area.width as i32, cv.buf.area.height as i32);
+    let g = &m.game;
+    let u = app.unfold();
+    let y = h / 2;
+    let (x0, x1) = (5, w - 6);
+    if u >= level::IMPACT && m.fx.shake > 0.0 {
+        cv.dx = if (m.fx.time / DT) as i64 / 3 % 2 == 0 { 1 } else { -1 };
+    }
+    court(cv, g, &m.fx, x0, x1, y, false, u >= level::TRAIL);
+    if u >= level::SCORE {
+        let l = g.score[0].to_string();
+        cv.text(x0 - 2 - l.len() as i32, y, &l, LEFT_COL);
+        cv.text(x1 + 2, y, &g.score[1].to_string(), RIGHT_COL);
+    }
+    if u >= level::IMPACT {
+        popups(cv, g, &m.fx, x0, x1, y);
+    }
+    // the one word before anything has happened
+    if u == level::BARE && !app.hinted && (m.fx.time * 1.5) as i32 % 2 == 0 {
+        cv.text(x0, y + 2, "space", FAINT);
+    }
+    if app.paused {
+        cv.center(y - 2, "paused", DIM);
+    }
+    y
+}
+
+/// What just unfolded: a quiet caption, and for the last level the line
+/// opening into a plane for a moment and closing again.
+fn unfolding(cv: &mut Canvas, app: &App, ly: i32, bare: bool) {
+    let Some((l, t)) = app.reveal else { return };
+    let (w, h) = (cv.buf.area.width as i32, cv.buf.area.height as i32);
+    let total = level::shown_for(l);
+    if l == level::PLANE {
+        // copy the line up and down, out to the edges, then back
+        let k = if t < 1.6 {
+            t / 1.6
+        } else if t < total - 1.6 {
+            1.0
+        } else {
+            ((total - t) / 1.6).max(0.0)
+        };
+        let reach_max = ly.max(h - 1 - ly);
+        let reach = (k * reach_max as f32).round() as i32;
+        let row: Vec<Option<(u8, u8, u8)>> = (0..w)
+            .map(|x| match cv.buf.cell((x as u16, ly as u16)) {
+                Some(c) if c.symbol() == "▀" => match c.fg {
+                    Color::Rgb(r, g, b) => Some((r, g, b)),
+                    _ => None,
+                },
+                _ => None,
+            })
+            .collect();
+        for d in 1..=reach {
+            let fade = 1.0 - 0.8 * d as f32 / (reach_max + 1) as f32;
+            for (x, c) in row.iter().enumerate() {
+                if let Some(c) = c {
+                    let col = mix(BG, *c, fade);
+                    cv.put(x as i32, ly - d, '▀', col);
+                    cv.put(x as i32, ly + d, '▀', col);
+                }
+            }
+        }
+    }
+    // the caption fades in and out
+    let a = (t / 0.4).min(1.0).min(((total - t) / 0.8).max(0.0));
+    let y = if bare { ly + 3 } else { h - 3 };
+    let text = level::caption(l);
+    let x = (w - text.chars().count() as i32) / 2;
+    let col = if l == level::PLANE { HOT } else { AMBER };
+    cv.text(x, y, text, mix(BG, col, a));
 }
 
 /// The court: one straight line of half blocks from x0 to x1 at row y, and
@@ -302,7 +393,7 @@ fn play(cv: &mut Canvas, app: &App, m: &Match) {
 /// long as its hit zone, bumping toward the ball on every press; the ball,
 /// the brightest thing there, going back and forth. `quiet` dims it for
 /// the title screen.
-fn court(cv: &mut Canvas, g: &Game, fx: &Fx, x0: i32, x1: i32, y: i32, quiet: bool) {
+fn court(cv: &mut Canvas, g: &Game, fx: &Fx, x0: i32, x1: i32, y: i32, quiet: bool, trail: bool) {
     let n = (x1 - x0 + 1).max(2);
     let cell = |pos: f32| x0 + (pos.clamp(0.0, 1.0) * (n - 1) as f32).round() as i32;
     let dim = |c: (u8, u8, u8)| if quiet { mix(BG, c, 0.75) } else { c };
@@ -316,7 +407,7 @@ fn court(cv: &mut Canvas, g: &Game, fx: &Fx, x0: i32, x1: i32, y: i32, quiet: bo
     let h = heat(g.speed());
     let trail_col = heat_color(h);
     let len = g.trail.len().max(1) as f32;
-    for (i, &p) in g.trail.iter().enumerate().rev() {
+    for (i, &p) in g.trail.iter().enumerate().rev().filter(|_| trail) {
         let age = i as f32 / len;
         cv.put(cell(p), y, BAR, dim(mix(DIM, trail_col, (1.0 - age) * (0.3 + h * 0.6))));
     }
@@ -349,8 +440,12 @@ fn court(cv: &mut Canvas, g: &Game, fx: &Fx, x0: i32, x1: i32, y: i32, quiet: bo
         };
         let own = if side == Side::Left { LEFT_COL } else { RIGHT_COL };
         let hurt = matches!(fx.conceded, Some((s, t)) if s == side && t < 0.8);
+        let won = matches!(g.phase, Phase::Over { winner, .. } if winner == side);
         let col = if hurt {
             if (fx.time * 12.0) as i32 % 2 == 0 { RED } else { own }
+        } else if won {
+            // the match is theirs: their paddle breathes
+            mix(own, HOT, 0.5 + 0.5 * (fx.time * 4.0).sin())
         } else if g.lockout[i] > 0.0 {
             mix(BG, own, 0.4)
         } else if g.since_hit[i] < 0.15 {

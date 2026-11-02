@@ -78,6 +78,12 @@ impl Audio {
         Audio { sink, muted }
     }
 
+    /// No device at all, for tests.
+    #[cfg(test)]
+    pub fn silent() -> Audio {
+        Audio { sink: None, muted: true }
+    }
+
     pub fn available(&self) -> bool {
         self.sink.is_some()
     }

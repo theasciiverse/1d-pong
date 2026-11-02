@@ -7,6 +7,55 @@ use crate::game::{Event, Game, Grade, Phase, Side, MAX_SPEED, MIN_SPEED};
 use crate::rng::Rng;
 use crate::store::Store;
 
+/// How far the game has unfolded for this player, saved between runs.
+/// It starts bare, just the line, and each level arrives the first time
+/// its trigger happens, strictly in order.
+pub mod level {
+    /// the line, the paddles and the ball; nothing else
+    pub const BARE: u8 = 0;
+    /// your first return
+    pub const SOUND: u8 = 1;
+    /// the first point: small scores at the ends of the line
+    pub const SCORE: u8 = 2;
+    /// the first rally of 5: the ball's trail
+    pub const TRAIL: u8 = 3;
+    /// your first smash, or a rally of 10: hit stop, sparks, grades
+    pub const IMPACT: u8 = 4;
+    /// your first win: big scores, the rally meter, the title and menu
+    pub const FULL: u8 = 5;
+    /// a win on Hard: the King of Lineland
+    pub const KING: u8 = 6;
+    /// beating the King: a second dimension opens for a moment
+    pub const PLANE: u8 = 7;
+    pub const MAX: u8 = PLANE;
+
+    pub fn caption(l: u8) -> &'static str {
+        match l {
+            SOUND => "sound",
+            SCORE => "score",
+            TRAIL => "trail",
+            IMPACT => "impact",
+            FULL => "the whole game  ·  ESC for the menu",
+            KING => "the King of Lineland challenges you",
+            PLANE => "upward, not northward",
+            _ => "",
+        }
+    }
+
+    /// How long the caption (and for PLANE the opening) lasts.
+    pub fn shown_for(l: u8) -> f32 {
+        if l == PLANE {
+            7.0
+        } else {
+            3.5
+        }
+    }
+}
+
+/// Before the full game unfolds, a finished match starts the next by
+/// itself after this.
+const BARE_RESTART: f32 = 5.0;
+
 /// The fixed simulation step.
 pub const DT: f32 = 1.0 / 240.0;
 /// After a match ends, presses are ignored this long (so a late hit
@@ -126,7 +175,8 @@ impl Match {
         Match { game: Game::new(target, first), cpus, mode, fx: Fx::new(rng.next()) }
     }
 
-    /// One fixed step. `juice` off (the pure view) skips the hit stop.
+    /// One fixed step. `juice` off (the pure view, or before impact has
+    /// unfolded) skips the hit stop.
     pub fn step(&mut self, juice: bool) {
         let fx = &mut self.fx;
         fx.time += DT;
@@ -155,12 +205,12 @@ impl Match {
 
     /// The match's own effects for what just happened in the game; sound
     /// and saving are the app's.
-    pub fn react(&mut self, events: &[Event]) {
+    pub fn react(&mut self, events: &[Event], impact: bool) {
         let g = &self.game;
         let fx = &mut self.fx;
         for e in events {
             match *e {
-                Event::Hit { side, grade, speed } => {
+                Event::Hit { side, grade, speed } if impact => {
                     fx.popups.retain(|p| p.side != side);
                     fx.popups.push(Popup { side, grade, age: 0.0 });
                     fx.freeze = hit_stop(grade);
@@ -177,10 +227,13 @@ impl Match {
                     }
                 }
                 Event::Point { winner, .. } => {
-                    fx.shake = 0.3;
-                    fx.freeze = POINT_STOP;
                     let loser = winner.other();
                     fx.conceded = Some((loser, 0.0));
+                    if !impact {
+                        continue;
+                    }
+                    fx.shake = 0.3;
+                    fx.freeze = POINT_STOP;
                     let (x, dir) = if loser == Side::Left { (0.0, 1.0) } else { (1.0, -1.0) };
                     fx.burst(x, dir, 18, 1.0, 1.0, true);
                 }
@@ -225,6 +278,10 @@ pub struct App {
     pub audio: Audio,
     pub rng: Rng,
     pub quit: bool,
+    /// the level that just unfolded, and for how long it has been shown
+    pub reveal: Option<(u8, f32)>,
+    /// whether the player has pressed anything yet this run
+    pub hinted: bool,
 }
 
 impl App {
@@ -232,22 +289,80 @@ impl App {
         let mut rng = Rng::new(seed);
         let skill = store.skill.as_deref().and_then(Skill::parse).unwrap_or(Skill::Normal);
         let demo = Match::new(Mode::Watch, target, &mut rng);
-        App { screen: Screen::Title, menu: 0, skill, target, demo, play: None, paused: false, store, audio, rng, quit: false }
+        App {
+            screen: Screen::Title,
+            menu: 0,
+            skill,
+            target,
+            demo,
+            play: None,
+            paused: false,
+            store,
+            audio,
+            rng,
+            quit: false,
+            reveal: None,
+            hinted: false,
+        }
+    }
+
+    pub fn unfold(&self) -> u8 {
+        self.store.unfold
+    }
+
+    /// Sounds only once sound has unfolded.
+    fn sound(&self, s: Sound) {
+        if self.unfold() >= level::SOUND {
+            self.audio.play(s);
+        }
+    }
+
+    /// Unfold `l` if it is the next level.
+    fn unlock(&mut self, l: u8) {
+        if self.store.unfold + 1 != l {
+            return;
+        }
+        self.store.unfold = l;
+        if l == level::KING {
+            self.skill = Skill::King;
+            self.store.skill = Some(Skill::King.key().to_string());
+        }
+        self.store.save();
+        self.reveal = Some((l, 0.0));
+        log::info!("unfolded level {l}: {}", level::caption(l));
+        self.sound(Sound::Point(true));
+    }
+
+    /// Set the level by hand (`--unfold N`), saved; its moment is shown
+    /// again, so each one can be seen on demand.
+    pub fn set_unfold(&mut self, l: u8) {
+        self.store.unfold = l.min(level::MAX);
+        self.store.save();
+        if l > level::BARE {
+            self.reveal = Some((self.store.unfold, 0.0));
+        }
     }
 
     pub fn start(&mut self, mode: Mode) {
         log::info!("start match {mode:?} to {}", self.target);
         if let Mode::Solo(skill) = mode {
-            self.store.skill = Some(skill.key().to_string());
-            self.store.save();
+            if self.unfold() >= level::FULL {
+                self.store.skill = Some(skill.key().to_string());
+                self.store.save();
+            }
         }
         self.play = Some(Match::new(mode, self.target, &mut self.rng));
         self.screen = Screen::Play;
         self.paused = false;
-        self.audio.play(Sound::Serve);
+        self.sound(Sound::Serve);
     }
 
     pub fn to_title(&mut self) {
+        if self.unfold() < level::FULL {
+            // there is no title yet: ESC leaves
+            self.quit = true;
+            return;
+        }
         log::info!("back to title");
         self.screen = Screen::Title;
         self.play = None;
@@ -257,11 +372,17 @@ impl App {
     /// Advance one fixed step: the title's demo always runs (quietly), a
     /// match unless paused.
     pub fn step(&mut self) {
-        let juice = !self.store.pure;
+        if let Some((l, t)) = &mut self.reveal {
+            *t += DT;
+            if *t > level::shown_for(*l) {
+                self.reveal = None;
+            }
+        }
+        let impact = !self.store.pure && self.unfold() >= level::IMPACT;
         if self.screen == Screen::Title {
             self.demo.step(true);
             let events = self.demo.game.take_events();
-            self.demo.react(&events);
+            self.demo.react(&events, true);
             if self.demo.over_for().is_some_and(|t| t > DEMO_RESTART) {
                 self.demo = Match::new(Mode::Watch, self.target, &mut self.rng);
             }
@@ -270,48 +391,93 @@ impl App {
         if self.paused {
             return;
         }
+        let bare = self.unfold() < level::FULL;
         let Some(m) = self.play.as_mut() else { return };
-        m.step(juice);
-        if m.mode == Mode::Watch && m.over_for().is_some_and(|t| t > DEMO_RESTART) {
-            *m = Match::new(Mode::Watch, self.target, &mut self.rng);
+        m.step(impact);
+        let restart = if m.mode == Mode::Watch { DEMO_RESTART } else if bare { BARE_RESTART } else { f32::INFINITY };
+        if m.over_for().is_some_and(|t| t > restart) {
+            let mode = m.mode;
+            *m = Match::new(mode, self.target, &mut self.rng);
+            log::info!("next match {mode:?}");
         }
         let events = m.game.take_events();
-        m.react(&events);
+        m.react(&events, impact);
         for e in events {
             self.on_event(e);
         }
     }
 
     fn on_event(&mut self, e: Event) {
+        let loud = self.unfold() >= level::SOUND;
         let Some(m) = self.play.as_mut() else { return };
         log::info!("{e:?}");
+        let audio = &self.audio;
+        let play = |s: Sound| {
+            if loud {
+                audio.play(s)
+            }
+        };
         let human_left = matches!(m.mode, Mode::Solo(_));
+        let mut unlocks = Vec::new();
         match e {
-            Event::Serve { .. } => self.audio.play(Sound::Serve),
-            Event::Hit { grade, speed, .. } => {
+            Event::Serve { .. } => play(Sound::Serve),
+            Event::Hit { side, grade, speed } => {
                 if grade == Grade::Smash {
-                    self.audio.play(Sound::Smash);
+                    play(Sound::Smash);
                 } else {
-                    self.audio.play(Sound::Hit(heat(speed)));
+                    play(Sound::Hit(heat(speed)));
+                }
+                if m.is_human(side) {
+                    unlocks.push(level::SOUND);
+                    if grade == Grade::Smash {
+                        unlocks.push(level::IMPACT);
+                    }
+                }
+                if m.mode != Mode::Watch {
+                    if m.game.rally >= 5 {
+                        unlocks.push(level::TRAIL);
+                    }
+                    if m.game.rally >= 10 {
+                        unlocks.push(level::IMPACT);
+                    }
                 }
             }
-            Event::Whiff { .. } => self.audio.play(Sound::Whiff),
+            Event::Whiff { .. } => play(Sound::Whiff),
             Event::Point { winner, .. } => {
-                self.audio.play(Sound::Point(!human_left || winner == Side::Left));
+                play(Sound::Point(!human_left || winner == Side::Left));
+                if m.mode != Mode::Watch {
+                    unlocks.push(level::SCORE);
+                }
             }
             Event::Win { winner, .. } => {
                 let best = m.game.best_rally;
                 if best > self.store.best_rally && m.mode != Mode::Watch {
                     self.store.best_rally = best;
                 }
-                if m.mode == Mode::Solo(Skill::King) && winner == Side::Left {
+                let human_won = match m.mode {
+                    Mode::Solo(_) => winner == Side::Left,
+                    Mode::Duo => true,
+                    Mode::Watch => false,
+                };
+                if human_won {
+                    unlocks.push(level::FULL);
+                }
+                if m.mode == Mode::Solo(Skill::Hard) && human_won {
+                    unlocks.push(level::KING);
+                }
+                if m.mode == Mode::Solo(Skill::King) && human_won {
                     self.store.king_beaten = true;
+                    unlocks.push(level::PLANE);
                 }
                 if m.mode != Mode::Watch {
                     self.store.save();
                 }
-                self.audio.play(if human_left && winner == Side::Right { Sound::Lose } else { Sound::Win });
+                play(if human_left && winner == Side::Right { Sound::Lose } else { Sound::Win });
             }
+        }
+        unlocks.sort();
+        for l in unlocks {
+            self.unlock(l);
         }
     }
 
@@ -329,6 +495,7 @@ impl App {
             return;
         }
         if m.is_human(side) {
+            self.hinted = true;
             log::debug!("press {side:?} pos {:.3} depth {:.3} phase {:?}", m.game.pos, m.game.depth(side), m.game.phase);
             m.game.press(side);
         }
@@ -344,7 +511,9 @@ impl App {
             return;
         }
         let i = Skill::ALL.iter().position(|&s| s == self.skill).unwrap_or(1) as i32;
-        self.skill = Skill::ALL[(i + d).clamp(0, Skill::ALL.len() as i32 - 1) as usize];
+        // the King only once he has challenged you
+        let top = if self.unfold() >= level::KING { Skill::ALL.len() } else { Skill::ALL.len() - 1 };
+        self.skill = Skill::ALL[(i + d).clamp(0, top as i32 - 1) as usize];
         self.audio.play(Sound::Menu);
     }
 
@@ -362,8 +531,10 @@ impl App {
             (Screen::Play, Some(m)) => {
                 let g = &m.game;
                 format!(
-                    "play {:?} paused {} phase {:?} score {:?} pos {:.3} vel {:.3} rally {} lockout {:?} zones {:.3}/{:.3}",
+                    "play {:?} unfold {} reveal {:?} paused {} phase {:?} score {:?} pos {:.3} vel {:.3} rally {} lockout {:?} zones {:.3}/{:.3}",
                     m.mode,
+                    self.store.unfold,
+                    self.reveal,
                     self.paused,
                     g.phase,
                     g.score,
@@ -383,4 +554,74 @@ impl App {
 /// The ball's speed as 0 (slowest) to 1 (fastest).
 pub fn heat(speed: f32) -> f32 {
     ((speed - MIN_SPEED) / (MAX_SPEED - MIN_SPEED)).clamp(0.0, 1.0)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::game::Grade;
+
+    fn fresh() -> App {
+        let dir = std::env::temp_dir().join(format!("1d-pong-test-{}", std::process::id()));
+        std::env::set_var("XDG_DATA_HOME", &dir);
+        App::new(Audio::silent(), Store::default(), 7, 42)
+    }
+
+    fn hit(side: Side, grade: Grade) -> Event {
+        Event::Hit { side, grade, speed: 0.5 }
+    }
+
+    #[test]
+    fn the_game_unfolds_in_order_as_you_play() {
+        let mut app = fresh();
+        app.start(Mode::Solo(Skill::Easy));
+        assert_eq!(app.unfold(), level::BARE);
+        // a point before any return: the score has to wait for sound
+        app.on_event(Event::Point { winner: Side::Right, score: [0, 1], rally: 0 });
+        assert_eq!(app.unfold(), level::BARE);
+        app.on_event(hit(Side::Left, Grade::Good));
+        assert_eq!(app.unfold(), level::SOUND);
+        app.on_event(Event::Point { winner: Side::Left, score: [1, 1], rally: 1 });
+        assert_eq!(app.unfold(), level::SCORE);
+        app.play.as_mut().unwrap().game.rally = 5;
+        app.on_event(hit(Side::Right, Grade::Good));
+        assert_eq!(app.unfold(), level::TRAIL);
+        app.on_event(hit(Side::Left, Grade::Smash));
+        assert_eq!(app.unfold(), level::IMPACT);
+        app.on_event(Event::Win { winner: Side::Left, score: [7, 3] });
+        assert_eq!(app.unfold(), level::FULL);
+        // a win on Normal is not a win on Hard
+        app.start(Mode::Solo(Skill::Normal));
+        app.on_event(Event::Win { winner: Side::Left, score: [7, 3] });
+        assert_eq!(app.unfold(), level::FULL);
+        app.start(Mode::Solo(Skill::Hard));
+        app.on_event(Event::Win { winner: Side::Left, score: [7, 6] });
+        assert_eq!(app.unfold(), level::KING);
+        assert_eq!(app.skill, Skill::King);
+        app.start(Mode::Solo(Skill::King));
+        app.on_event(Event::Win { winner: Side::Left, score: [7, 6] });
+        assert_eq!(app.unfold(), level::PLANE);
+        assert!(app.store.king_beaten);
+        assert_eq!(app.reveal.map(|r| r.0), Some(level::PLANE));
+    }
+
+    #[test]
+    fn the_computer_playing_itself_unfolds_nothing() {
+        let mut app = fresh();
+        app.start(Mode::Watch);
+        app.on_event(hit(Side::Left, Grade::Smash));
+        app.on_event(Event::Point { winner: Side::Left, score: [1, 0], rally: 12 });
+        app.on_event(Event::Win { winner: Side::Left, score: [7, 0] });
+        assert_eq!(app.unfold(), level::BARE);
+    }
+
+    #[test]
+    fn a_rally_of_ten_brings_impact_without_a_smash() {
+        let mut app = fresh();
+        app.store.unfold = level::TRAIL;
+        app.start(Mode::Solo(Skill::Easy));
+        app.play.as_mut().unwrap().game.rally = 10;
+        app.on_event(hit(Side::Right, Grade::Good));
+        assert_eq!(app.unfold(), level::IMPACT);
+    }
 }

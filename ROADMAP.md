@@ -50,6 +50,27 @@ going back and forth along it.
 - The trail and the sparks stay on the line, lighting it up; the glow rows, paddle caps,
   posts and flying sparks of 0.3.0 are gone
 
+## 0.5.0: it unfolds as you play (2026-11-02)
+
+David: "As you play, more things appear?" The game starts bare and grows, the way it was built.
+Each level arrives the first time its trigger happens, strictly in order, with a quiet caption,
+and is remembered (`unfold` in the state file):
+
+| Level | Arrives on | What appears |
+|---|---|---|
+| 0 | the first run | only the line, the paddles and the ball, against Easy; the one word "space" until you press |
+| 1 | your first return | sound |
+| 2 | the first point | small scores at the ends of the line |
+| 3 | the first rally of 5 | the ball's trail |
+| 4 | your first smash, or a rally of 10 | hit stop, sparks, hit grades, shake |
+| 5 | your first win | big scores, rally meter, title and menu, two players and watch |
+| 6 | a win on Hard | the King of Lineland, picked for you |
+| 7 | beating the King | the line opens into a plane for a moment: "upward, not northward" |
+
+Before level 5 a finished match starts the next by itself and ESC leaves. `--unfold N` (or `all`)
+sets the level and shows its moment again; `--unfold 0` starts over. The computer playing
+itself unfolds nothing.
+
 ## Next
 
 - Rally milestones (10, 20, 30 hits): a banner, a sound, the line starting to glow

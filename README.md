@@ -11,6 +11,10 @@ and you are locked out for a moment. First to 7 wins.
   3 ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃ 5
 ```
 
+The game starts with nothing but the line and unfolds as you play. How
+far it has unfolded is remembered; `--unfold all` skips ahead, `--unfold 0`
+starts over.
+
 ## Play
 
 ```bash
