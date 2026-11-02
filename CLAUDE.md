@@ -32,7 +32,9 @@ several roadmap steps in at once.
   multiplies the speed by 0.84 + 0.42 d; d >= 0.92 is a smash (+0.10).
   Clamped to 0.34..2.7
 - A press that hits nothing (ball not in your zone or going away) locks
-  that side out for 0.32 s; held keys don't repeat into whiffs
+  that side out for 0.32 s. Key repeats are ignored where the terminal
+  reports them (kitty keyboard protocol); elsewhere a held key repeats
+  into whiffs
 - The loser of a point serves; the serve goes by itself after 3 s
 - First to 7 (`--to N`)
 
@@ -53,5 +55,5 @@ a press counts on the tick it happened in, not at the next frame.
 
 - gilrs reports 3D mice (David's SpaceMouse) as gamepads; only pads with
   SDL mappings are used, `ONE_D_PONG_ANY_PAD=1` allows all
-- The 2026-11-02 fuller draft (title, menu, sound, glow, big font) is the
-  source for later roadmap steps
+- The 2026-11-02 fuller draft (title, menu, sound, glow, big font) is on
+  the `full-draft` branch, the source for later roadmap steps
