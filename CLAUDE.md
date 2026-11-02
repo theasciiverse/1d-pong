@@ -3,7 +3,7 @@
 Pong with one dimension, for the Asciiverse catalog. Rust + Ratatui.
 Started 2026-11-02 (David: "We NEED an AWESOME 1D pong game!").
 
-**Status:** 0.5.0, playable, fleshed out. Own git repo, private at
+**Status:** 0.5.0, playable, in `hub/catalog`, fleshed out. Own git repo, private at
 github.com/theasciiverse/1d-pong, folder `games/1d-pong`.
 Crate `one-d-pong` (Cargo package names can't start with a digit),
 binary `1d-pong`. What comes next is in `ROADMAP.md`.
@@ -87,3 +87,8 @@ a press counts on the tick it happened in, not at the next frame.
 - Sounds are synthesised in src/audio.rs (square, triangle and noise),
   no sound files
 - Settings and the best rally live in $XDG_DATA_HOME/1d-pong/state
+- Catalog preview: `asciiverse/1d-pong.cast`, recorded with
+  `hub/tools/castrec.py` from a throwaway home whose state has
+  `unfold=7` (so no unfold captions), script
+  `w4;k3;w34;kesc;w1.5;kq;w0.5`: the title with its demo line, then
+  watch mode. Copy it to `hub/site/casts/` after re-recording
