@@ -28,7 +28,20 @@ when David said to flesh it out.
 - Best rally and beating the King of Lineland, remembered between runs
 - The pure view stays: V (or `--pure`) switches back to just the line, and it is remembered
 
+## 0.3.0: paddles and impact (2026-11-02)
+
+- The hit zones drawn as paddles: solid amber bars two half-rows tall, as long as the zone,
+  so the leader's shrinking paddle shows; the smash spot at the back brighter
+- Each hit swings the paddle forward a cell or two and flashes it; a whiff turns it red for the lockout
+- Hit stop: the game holds still for a moment on every hit, 25 ms for an early one up to 110 ms for a smash, and 140 ms on a point
+- Sparks off every hit, more and further the better the hit, and a red burst from the post on a point
+- The ball drawn round (●) so it never looks like part of a paddle
+
 ## Next
+
+- Rally milestones (10, 20, 30 hits): a banner, a sound, the line starting to glow
+- Match point tension: a heartbeat, the posts pulsing, a longer trail
+- A ripple down the line from each hit; afterimages of the ball near top speed
 
 - Lineland: a story mode after Abbott's Flatland, a companion to the Flatland movie
 - Things on the line: blocks, a ghost ball, a split ball, a moving middle wall

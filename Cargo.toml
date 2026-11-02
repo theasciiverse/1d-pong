@@ -1,6 +1,6 @@
 [package]
 name = "one-d-pong"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 license = "MIT"
 description = "1D-Pong: Pong with one dimension, for the terminal. Rust + Ratatui"

@@ -3,7 +3,7 @@
 Pong with one dimension, for the Asciiverse catalog. Rust + Ratatui.
 Started 2026-11-02 (David: "We NEED an AWESOME 1D pong game!").
 
-**Status:** 0.2.0, playable, fleshed out. Own git repo, private at
+**Status:** 0.3.0, playable, fleshed out. Own git repo, private at
 github.com/theasciiverse/1d-pong, folder `games/1d-pong`.
 Crate `one-d-pong` (Cargo package names can't start with a digit),
 binary `1d-pong`. What comes next is in `ROADMAP.md`.
@@ -46,6 +46,15 @@ Picks an aim depth each time the ball comes, mean and spread by
 strength, the spread growing with speed. Aim past 1 and the ball gets by;
 aim before the zone and it whiffs, gets locked out, and aims deeper.
 King against King rallies run to 20 and more.
+
+## Paddles and impact (0.3.0, David's ask)
+
+The hit zone is the paddle: in one dimension its only width is its length
+along the line, so it is drawn as a solid bar exactly as long as the zone
+(`█` on the line with `▄`/`▀` caps), the smash spot (depth 0.92 and over)
+brighter. Drawing only; the rules didn't change. On a hit the game holds
+still for a hit stop (src/app.rs `hit_stop`, longer the better the hit)
+and sparks fly (`Fx::burst`). Hit stop is off in the pure view.
 
 ## Timing
 

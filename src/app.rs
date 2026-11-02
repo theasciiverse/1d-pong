@@ -38,13 +38,74 @@ pub struct Popup {
     pub age: f32,
 }
 
-#[derive(Default)]
+/// A spark thrown off a hit. `x` is along the line (0..1, like the ball),
+/// `y` in rows from the line (negative is up).
+pub struct Spark {
+    pub x: f32,
+    pub y: f32,
+    pub vx: f32,
+    pub vy: f32,
+    pub life: f32,
+    pub max: f32,
+    /// the ball's heat when it was thrown, for its colour
+    pub heat: f32,
+    /// thrown by a point rather than a hit: drawn red
+    pub hurt: bool,
+}
+
 pub struct Fx {
     pub shake: f32,
     pub popups: Vec<Popup>,
     /// the side that just conceded, and how long ago
     pub conceded: Option<(Side, f32)>,
     pub time: f32,
+    /// hit stop: the game holds still this much longer
+    pub freeze: f32,
+    pub sparks: Vec<Spark>,
+    rng: Rng,
+}
+
+/// Hit stop for each grade, in seconds: the harder the hit, the longer
+/// the moment of impact is held.
+fn hit_stop(grade: Grade) -> f32 {
+    match grade {
+        Grade::Early => 0.025,
+        Grade::Good => 0.04,
+        Grade::Great => 0.065,
+        Grade::Smash => 0.11,
+    }
+}
+
+const POINT_STOP: f32 = 0.14;
+
+impl Fx {
+    fn new(seed: u64) -> Fx {
+        Fx { shake: 0.0, popups: Vec::new(), conceded: None, time: 0.0, freeze: 0.0, sparks: Vec::new(), rng: Rng::new(seed) }
+    }
+
+    /// Throw `count` sparks from `x`, mostly in direction `dir` (+1 right).
+    fn burst(&mut self, x: f32, dir: f32, count: usize, power: f32, heat: f32, hurt: bool) {
+        for _ in 0..count {
+            let r = &mut self.rng;
+            let back = r.unit() < 0.25;
+            let vx = dir * (0.04 + r.unit() * 0.30 * power) * if back { -0.5 } else { 1.0 };
+            let vy = (r.unit() - 0.5) * 2.0 * (3.0 + 5.0 * power);
+            let max = 0.18 + r.unit() * 0.30 * power.max(0.6);
+            self.sparks.push(Spark { x, y: 0.0, vx, vy, life: max, max, heat, hurt });
+        }
+    }
+
+    fn update_sparks(&mut self) {
+        let drag = 1.0 - 3.5 * DT;
+        for s in &mut self.sparks {
+            s.x += s.vx * DT;
+            s.y += s.vy * DT;
+            s.vx *= drag;
+            s.vy *= drag;
+            s.life -= DT;
+        }
+        self.sparks.retain(|s| s.life > 0.0 && (0.0..=1.0).contains(&s.x) && s.y.abs() < 4.0);
+    }
 }
 
 pub struct Match {
@@ -62,14 +123,11 @@ impl Match {
             Mode::Duo => vec![],
             Mode::Watch => vec![Cpu::new(Side::Left, Skill::King, rng.next()), Cpu::new(Side::Right, Skill::King, rng.next())],
         };
-        Match { game: Game::new(target, first), cpus, mode, fx: Fx::default() }
+        Match { game: Game::new(target, first), cpus, mode, fx: Fx::new(rng.next()) }
     }
 
-    pub fn step(&mut self) {
-        for c in &mut self.cpus {
-            c.step(&mut self.game);
-        }
-        self.game.tick(DT);
+    /// One fixed step. `juice` off (the pure view) skips the hit stop.
+    pub fn step(&mut self, juice: bool) {
         let fx = &mut self.fx;
         fx.time += DT;
         fx.shake = (fx.shake - DT).max(0.0);
@@ -77,8 +135,57 @@ impl Match {
             p.age += DT;
         }
         fx.popups.retain(|p| p.age < 0.9);
+        if !juice {
+            fx.freeze = 0.0;
+        }
+        if fx.freeze > 0.0 {
+            // the moment of impact: everything holds still but the flashes
+            fx.freeze -= DT;
+            return;
+        }
         if let Some((_, t)) = &mut fx.conceded {
             *t += DT;
+        }
+        fx.update_sparks();
+        for c in &mut self.cpus {
+            c.step(&mut self.game);
+        }
+        self.game.tick(DT);
+    }
+
+    /// The match's own effects for what just happened in the game; sound
+    /// and saving are the app's.
+    pub fn react(&mut self, events: &[Event]) {
+        let g = &self.game;
+        let fx = &mut self.fx;
+        for e in events {
+            match *e {
+                Event::Hit { side, grade, speed } => {
+                    fx.popups.retain(|p| p.side != side);
+                    fx.popups.push(Popup { side, grade, age: 0.0 });
+                    fx.freeze = hit_stop(grade);
+                    let (count, power) = match grade {
+                        Grade::Early => (3, 0.4),
+                        Grade::Good => (5, 0.6),
+                        Grade::Great => (8, 0.85),
+                        Grade::Smash => (16, 1.3),
+                    };
+                    let dir = if side == Side::Left { 1.0 } else { -1.0 };
+                    fx.burst(g.pos, dir, count, power, heat(speed), false);
+                    if grade == Grade::Smash {
+                        fx.shake = 0.18;
+                    }
+                }
+                Event::Point { winner, .. } => {
+                    fx.shake = 0.3;
+                    fx.freeze = POINT_STOP;
+                    let loser = winner.other();
+                    fx.conceded = Some((loser, 0.0));
+                    let (x, dir) = if loser == Side::Left { (0.0, 1.0) } else { (1.0, -1.0) };
+                    fx.burst(x, dir, 18, 1.0, 1.0, true);
+                }
+                _ => {}
+            }
         }
     }
 
@@ -150,9 +257,11 @@ impl App {
     /// Advance one fixed step: the title's demo always runs (quietly), a
     /// match unless paused.
     pub fn step(&mut self) {
+        let juice = !self.store.pure;
         if self.screen == Screen::Title {
-            self.demo.step();
-            self.demo.game.take_events();
+            self.demo.step(true);
+            let events = self.demo.game.take_events();
+            self.demo.react(&events);
             if self.demo.over_for().is_some_and(|t| t > DEMO_RESTART) {
                 self.demo = Match::new(Mode::Watch, self.target, &mut self.rng);
             }
@@ -162,11 +271,12 @@ impl App {
             return;
         }
         let Some(m) = self.play.as_mut() else { return };
-        m.step();
+        m.step(juice);
         if m.mode == Mode::Watch && m.over_for().is_some_and(|t| t > DEMO_RESTART) {
             *m = Match::new(Mode::Watch, self.target, &mut self.rng);
         }
         let events = m.game.take_events();
+        m.react(&events);
         for e in events {
             self.on_event(e);
         }
@@ -178,11 +288,8 @@ impl App {
         let human_left = matches!(m.mode, Mode::Solo(_));
         match e {
             Event::Serve { .. } => self.audio.play(Sound::Serve),
-            Event::Hit { side, grade, speed } => {
-                m.fx.popups.retain(|p| p.side != side);
-                m.fx.popups.push(Popup { side, grade, age: 0.0 });
+            Event::Hit { grade, speed, .. } => {
                 if grade == Grade::Smash {
-                    m.fx.shake = 0.18;
                     self.audio.play(Sound::Smash);
                 } else {
                     self.audio.play(Sound::Hit(heat(speed)));
@@ -190,8 +297,6 @@ impl App {
             }
             Event::Whiff { .. } => self.audio.play(Sound::Whiff),
             Event::Point { winner, .. } => {
-                m.fx.shake = 0.3;
-                m.fx.conceded = Some((winner.other(), 0.0));
                 self.audio.play(Sound::Point(!human_left || winner == Side::Left));
             }
             Event::Win { winner, .. } => {

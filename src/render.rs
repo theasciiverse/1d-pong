@@ -23,6 +23,8 @@ const AMBER: (u8, u8, u8) = (255, 176, 0);
 const DIM_AMBER: (u8, u8, u8) = (120, 78, 0);
 const RED: (u8, u8, u8) = (255, 56, 48);
 const HOT: (u8, u8, u8) = (255, 250, 225);
+const PADDLE: (u8, u8, u8) = (205, 135, 0);
+const SWEET: (u8, u8, u8) = (255, 214, 90);
 
 fn rgb(c: (u8, u8, u8)) -> Color {
     Color::Rgb(c.0, c.1, c.2)
@@ -59,6 +61,17 @@ impl Canvas<'_> {
         }
         if let Some(c) = self.buf.cell_mut((x as u16, y as u16)) {
             c.set_char(ch).set_fg(rgb(fg));
+        }
+    }
+
+    fn put_bg(&mut self, x: i32, y: i32, ch: char, fg: (u8, u8, u8), bg: (u8, u8, u8)) {
+        self.put(x, y, ch, fg);
+        let (x, y) = (x + self.dx, y);
+        let a = self.buf.area;
+        if x >= a.x as i32 && y >= a.y as i32 && x < a.right() as i32 && y < a.bottom() as i32 {
+            if let Some(c) = self.buf.cell_mut((x as u16, y as u16)) {
+                c.set_bg(rgb(bg));
+            }
         }
     }
 
@@ -293,12 +306,13 @@ fn play(cv: &mut Canvas, app: &App, m: &Match) {
     cv.center(h - 1, &help, FAINT);
 }
 
-/// The court: one row from x0 to x1 at row y, goal posts outside it, hit
-/// zones at both ends, the ball, its trail and its glow. `quiet` dims it
-/// for the title screen.
+/// The court: one row from x0 to x1 at row y, goal posts outside it, the
+/// two paddles at its ends, the ball, its trail, glow and sparks. `quiet`
+/// dims it for the title screen.
 fn court(cv: &mut Canvas, g: &Game, fx: &Fx, x0: i32, x1: i32, y: i32, quiet: bool) {
     let n = (x1 - x0 + 1).max(2);
     let cell = |pos: f32| x0 + (pos.clamp(0.0, 1.0) * (n - 1) as f32).round() as i32;
+    let pos_of = |x: i32| (x - x0) as f32 / (n - 1) as f32;
     let dim = |c: (u8, u8, u8)| if quiet { mix(BG, c, 0.75) } else { c };
 
     // posts: red flash on the side that just conceded
@@ -310,34 +324,10 @@ fn court(cv: &mut Canvas, g: &Game, fx: &Fx, x0: i32, x1: i32, y: i32, quiet: bo
         }
     }
 
-    // the line and the zones
-    let left_end = cell(g.zone(Side::Left));
-    let right_start = cell(1.0 - g.zone(Side::Right));
+    // the line
     for x in x0..=x1 {
-        let side = if x <= left_end {
-            Some(Side::Left)
-        } else if x >= right_start {
-            Some(Side::Right)
-        } else {
-            None
-        };
-        let col = match side {
-            Some(s) => {
-                let i = s.idx();
-                if g.lockout[i] > 0.0 {
-                    mix(DIM_AMBER, RED, 0.6)
-                } else if g.since_hit[i] < 0.15 {
-                    mix(AMBER, HOT, 1.0 - g.since_hit[i] / 0.15)
-                } else if g.incoming(s) {
-                    mix(DIM_AMBER, AMBER, 0.45)
-                } else {
-                    DIM_AMBER
-                }
-            }
-            None => DIM,
-        };
-        let ch = if x == (x0 + x1) / 2 && side.is_none() { '╋' } else { '━' };
-        cv.put(x, y, ch, dim(col));
+        let ch = if x == (x0 + x1) / 2 { '╋' } else { '━' };
+        cv.put(x, y, ch, dim(DIM));
     }
 
     let h = heat(g.speed());
@@ -350,7 +340,7 @@ fn court(cv: &mut Canvas, g: &Game, fx: &Fx, x0: i32, x1: i32, y: i32, quiet: bo
         cv.put(cell(p), y, '━', dim(mix(DIM, ball_col, (1.0 - age) * (0.35 + h * 0.65))));
     }
 
-    // the ball and the light it spills out of its one dimension
+    // the ball's light, spilling out of its one dimension
     let bx = cell(g.pos);
     let visible = match g.phase {
         Phase::Point { t, .. } => (t * 10.0) as i32 % 2 == 0 && t < 0.8,
@@ -364,7 +354,64 @@ fn court(cv: &mut Canvas, g: &Game, fx: &Fx, x0: i32, x1: i32, y: i32, quiet: bo
             cv.put(bx + d, y - 1, '▄', c);
             cv.put(bx + d, y + 1, '▀', c);
         }
-        cv.put(bx, y, '█', dim(ball_col));
+    }
+
+    // the paddles: solid bars as long as each side's hit zone, the smash
+    // spot at the back brighter, swinging forward a cell or two on a hit
+    let mut on_paddle = [(0, -1); 2];
+    for side in [Side::Left, Side::Right] {
+        let i = side.idx();
+        let z = g.zone(side);
+        let since = g.since_hit[i];
+        let swing = if since < 0.05 { 2 } else if since < 0.14 { 1 } else { 0 };
+        let (from, to) = match side {
+            Side::Left => (x0, cell(z) + swing),
+            Side::Right => (cell(1.0 - z) - swing, x1),
+        };
+        on_paddle[i] = (from, to);
+        for x in from..=to {
+            let depth = match side {
+                Side::Left => (z - pos_of(x)) / z,
+                Side::Right => (pos_of(x) - (1.0 - z)) / z,
+            };
+            let sweet = depth >= 0.92 || x == if side == Side::Left { x0 } else { x1 };
+            let mut col = if sweet { SWEET } else { PADDLE };
+            if g.lockout[i] > 0.0 {
+                col = mix(DIM_AMBER, RED, 0.6);
+            } else if since < 0.15 {
+                col = mix(col, HOT, 1.0 - since / 0.15);
+            } else if g.incoming(side) {
+                col = mix(col, HOT, 0.12);
+            }
+            let col = dim(col);
+            let cap = mix(BG, col, 0.7);
+            cv.put(x, y - 1, '▄', cap);
+            cv.put(x, y, '█', col);
+            cv.put(x, y + 1, '▀', cap);
+        }
+    }
+
+    // sparks; on the line itself they light it up instead
+    for s in &fx.sparks {
+        let k = s.life / s.max;
+        let base = if s.hurt { RED } else { heat_color(s.heat) };
+        let col = dim(mix(BG, mix(base, HOT, k * 0.6), k.sqrt()));
+        let row = s.y.round() as i32;
+        let x = cell(s.x);
+        if row == 0 {
+            // along the line they light it up, but leave the paddles whole
+            if !on_paddle.iter().any(|&(a, b)| (a..=b).contains(&x)) {
+                cv.put(x, y, '━', col);
+            }
+        } else {
+            let ch = if k > 0.66 { '*' } else if k > 0.33 { '+' } else { '·' };
+            cv.put(x, y + row, ch, col);
+        }
+    }
+
+    if visible {
+        // the ball punches through whatever it is over
+        cv.put_bg(bx, y, '●', dim(ball_col), BG);
     }
 }
 
