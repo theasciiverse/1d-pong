@@ -6,7 +6,7 @@ time, each one played before the next goes in (David, 2026-11-02).
 
 A fuller first draft (title screen and menu, big block scores, the ball's
 glow and trail, grade popups, screen shake, synthesised sound, saved best
-rally) was written the same day and set aside; its code is the source
+rally) was written the same day and set aside; its code, on the `full-draft` branch, is the source
 for the steps below, not a plan to restore it all at once.
 
 ## 0.1.0: the line (now)
