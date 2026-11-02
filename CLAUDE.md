@@ -3,7 +3,8 @@
 Pong with one dimension, for the Asciiverse catalog. Rust + Ratatui.
 Started 2026-11-02 (David: "We NEED an AWESOME 1D pong game!").
 
-**Status:** 0.2.0, playable, fleshed out. Own git repo, folder `games/1d-pong`.
+**Status:** 0.2.0, playable, fleshed out. Own git repo, private at
+github.com/theasciiverse/1d-pong, folder `games/1d-pong`.
 Crate `one-d-pong` (Cargo package names can't start with a digit),
 binary `1d-pong`. What comes next is in `ROADMAP.md`.
 
