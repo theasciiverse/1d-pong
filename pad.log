@@ -1,0 +1,732 @@
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.10s
+     Running `target/release/1d-pong`
+[2026-11-03T09:42:11Z INFO  1d_pong] start version 0.5.0 audio true muted false seed 1793698931123661755 target 7 store Store { skill: Some("normal"), best_rally: 0, king_beaten: false, pure: false, unfold: 4 }
+[2026-11-03T09:42:11Z INFO  1d_pong] unfold level 4
+[2026-11-03T09:42:11Z INFO  1d_pong::app] start match Solo(Easy) to 7
+[2026-11-03T09:42:11Z INFO  1d_pong] terminal 99x30 kitty_keyboard true
+[2026-11-03T09:42:11Z DEBUG gilrs::gamepad] Loaded 716 mappings.
+[2026-11-03T09:42:11Z INFO  gilrs_core::platform::platform::gamepad] Gamepad /dev/input/event4 (3Dconnexion 3Dconnexion Universal Receiver) connected.
+[2026-11-03T09:42:11Z DEBUG gilrs_core::platform::platform::gamepad] Gamepad /dev/input/event4: uuid: 03000000-6f25-0000-52c6-000011010000, ff_supported: false, axes: [EvCode { kind: 3, code: 0 }, EvCode { kind: 3, code: 1 }, EvCode { kind: 3, code: 2 }, EvCode { kind: 3, code: 3 }, EvCode { kind: 3, code: 4 }, EvCode { kind: 3, code: 5 }], buttons: [EvCode { kind: 1, code: 256 }, EvCode { kind: 1, code: 257 }], axes_info: AxesInfo { info: {0: AxisInfo { min: -350, max: 350, deadzone: Some(0) }, 1: AxisInfo { min: -350, max: 350, deadzone: Some(0) }, 2: AxisInfo { min: -350, max: 350, deadzone: Some(0) }, 3: AxisInfo { min: -350, max: 350, deadzone: Some(0) }, 4: AxisInfo { min: -350, max: 350, deadzone: Some(0) }, 5: AxisInfo { min: -350, max: 350, deadzone: Some(0) }} }
+[2026-11-03T09:42:11Z INFO  gilrs_core::platform::platform::gamepad] Gamepad /dev/input/event25 (8Bitdo SF30 Pro) connected.
+[2026-11-03T09:42:11Z DEBUG gilrs_core::platform::platform::gamepad] Gamepad /dev/input/event25: uuid: 05000000-5e04-0000-e002-000003090000, ff_supported: true, axes: [EvCode { kind: 3, code: 0 }, EvCode { kind: 3, code: 1 }, EvCode { kind: 3, code: 2 }, EvCode { kind: 3, code: 3 }, EvCode { kind: 3, code: 4 }, EvCode { kind: 3, code: 5 }, EvCode { kind: 3, code: 16 }, EvCode { kind: 3, code: 17 }], buttons: [EvCode { kind: 1, code: 304 }, EvCode { kind: 1, code: 305 }, EvCode { kind: 1, code: 306 }, EvCode { kind: 1, code: 307 }, EvCode { kind: 1, code: 308 }, EvCode { kind: 1, code: 309 }, EvCode { kind: 1, code: 310 }, EvCode { kind: 1, code: 311 }, EvCode { kind: 1, code: 312 }, EvCode { kind: 1, code: 313 }, EvCode { kind: 1, code: 139 }], axes_info: AxesInfo { info: {0: AxisInfo { min: 0, max: 65535, deadzone: Some(4095) }, 1: AxisInfo { min: 0, max: 65535, deadzone: Some(4095) }, 2: AxisInfo { min: 0, max: 1023, deadzone: Some(63) }, 3: AxisInfo { min: 0, max: 65535, deadzone: Some(4095) }, 4: AxisInfo { min: 0, max: 65535, deadzone: Some(4095) }, 5: AxisInfo { min: 0, max: 1023, deadzone: Some(63) }, 16: AxisInfo { min: -1, max: 1, deadzone: Some(0) }, 17: AxisInfo { min: -1, max: 1, deadzone: Some(0) }} }
+[2026-11-03T09:42:11Z WARN  gilrs::gamepad] No mapping found for UUID 03000000-6f25-0000-52c6-000011010000
+    	Default mapping will be used.
+[2026-11-03T09:42:11Z INFO  1d_pong] focus gained
+[2026-11-03T09:42:11Z DEBUG gilrs::ff::server] New ff event: Open { id: 1, device: FfDevice { inner: Device { effect: 0, file: File { fd: 34, path: "/dev/input/event25", read: false, write: true } } } }
+[2026-11-03T09:42:11Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.4999997 } score [0, 0] pos 0.075 vel 0.000 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:12Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 1.0041659 } score [0, 0] pos 0.075 vel 0.000 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:12Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 1.5083393 } score [0, 0] pos 0.075 vel 0.000 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:13Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:13Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:13Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 1.9791789 }
+[2026-11-03T09:42:13Z INFO  1d_pong::app] Serve { side: Left }
+[2026-11-03T09:42:13Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.087 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:13Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.299 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:14Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:14Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:14Z DEBUG 1d_pong::app] press Left pos 0.493 depth -2.288 phase Rally
+[2026-11-03T09:42:14Z INFO  1d_pong::app] Whiff { side: Left }
+[2026-11-03T09:42:14Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.511 vel 0.420 rally 0 lockout [0.27833337, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:14Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.722 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:14Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:14Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:14Z DEBUG 1d_pong::app] press Left pos 0.770 depth -4.132 phase Rally
+[2026-11-03T09:42:14Z INFO  1d_pong::app] Whiff { side: Left }
+[2026-11-03T09:42:15Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.934 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:15Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.46687505 }
+[2026-11-03T09:42:15Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.720 vel -0.467 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:16Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.487 vel -0.467 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:16Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.251 vel -0.467 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:16Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:16Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:16Z DEBUG 1d_pong::app] press Left pos 0.127 depth 0.154 phase Rally
+[2026-11-03T09:42:16Z INFO  1d_pong::app] Hit { side: Left, grade: Early, speed: 0.4373188 }
+[2026-11-03T09:42:17Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.216 vel 0.437 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:17Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.437 vel 0.437 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:18Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.655 vel 0.437 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:18Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.876 vel 0.437 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:18Z INFO  1d_pong::app] Point { winner: Left, score: [1, 0], rally: 2 }
+[2026-11-03T09:42:19Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.07500001 } score [1, 0] pos 1.000 vel 0.437 rally 2 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:19Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.5791663 } score [1, 0] pos 1.000 vel 0.437 rally 2 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:20Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 1.0791669 } score [1, 0] pos 1.000 vel 0.437 rally 2 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:20Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 1.5833403 } score [1, 0] pos 1.000 vel 0.437 rally 2 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:21Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.4874997 } score [1, 0] pos 0.925 vel 0.000 rally 2 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:21Z INFO  1d_pong::app] Serve { side: Right }
+[2026-11-03T09:42:21Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.913 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:22Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.701 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:22Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.489 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:23Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.279 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:23Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.068 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:23Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:23Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:23Z DEBUG 1d_pong::app] press Left pos 0.050 depth 0.638 phase Rally
+[2026-11-03T09:42:23Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.4802838 }
+[2026-11-03T09:42:24Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.252 vel 0.480 rally 1 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:24Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.494 vel 0.480 rally 1 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:25Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.736 vel 0.480 rally 1 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:25Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.52403116 }
+[2026-11-03T09:42:25Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.896 vel -0.524 rally 2 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:26Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.634 vel -0.524 rally 2 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:26Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.372 vel -0.524 rally 2 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:27Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.110 vel -0.524 rally 2 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:27Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:27Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:27Z DEBUG 1d_pong::app] press Left pos 0.011 depth 0.917 phase Rally
+[2026-11-03T09:42:27Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.6569866 }
+[2026-11-03T09:42:27Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.173 vel 0.657 rally 3 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:28Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.504 vel 0.657 rally 3 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:28Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.833 vel 0.657 rally 3 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:28Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.7566243 }
+[2026-11-03T09:42:29Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.742 vel -0.757 rally 4 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:29Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.364 vel -0.757 rally 4 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:42:30Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:30Z INFO  1d_pong::app] Point { winner: Right, score: [1, 1], rally: 4 }
+[2026-11-03T09:42:30Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:30Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.0 }
+[2026-11-03T09:42:30Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.0 } score [1, 1] pos 0.000 vel -0.757 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:30Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.37916648 } score [1, 1] pos 0.000 vel -0.757 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:31Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:31Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:31Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.66249955 }
+[2026-11-03T09:42:31Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.88333267 } score [1, 1] pos 0.000 vel -0.757 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:31Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 1.3833376 } score [1, 1] pos 0.000 vel -0.757 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:32Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.2874999 } score [1, 1] pos 0.075 vel 0.000 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:32Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.7916661 } score [1, 1] pos 0.075 vel 0.000 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:33Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 1.2916697 } score [1, 1] pos 0.075 vel 0.000 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:33Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:33Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:33Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 1.4666721 }
+[2026-11-03T09:42:33Z INFO  1d_pong::app] Serve { side: Left }
+[2026-11-03T09:42:33Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.212 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:34Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.423 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:34Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.635 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:35Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.845 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:35Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.48745495 }
+[2026-11-03T09:42:35Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.850 vel -0.487 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:36Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.604 vel -0.487 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:36Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.359 vel -0.487 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:37Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.113 vel -0.487 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:37Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:37Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:37Z DEBUG 1d_pong::app] press Left pos 0.046 depth 0.694 phase Rally
+[2026-11-03T09:42:37Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.5665609 }
+[2026-11-03T09:42:37Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.228 vel 0.567 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:38Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.513 vel 0.567 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:38Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.799 vel 0.567 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:39Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.6233664 }
+[2026-11-03T09:42:39Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.793 vel -0.623 rally 3 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:39Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.482 vel -0.623 rally 3 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:40Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.170 vel -0.623 rally 3 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:42:40Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:40Z INFO  1d_pong::app] Point { winner: Right, score: [1, 2], rally: 3 }
+[2026-11-03T09:42:40Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:40Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.0 }
+[2026-11-03T09:42:40Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.08750002 } score [1, 2] pos 0.000 vel -0.623 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:41Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:41Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:41Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.57499963 }
+[2026-11-03T09:42:41Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.5874996 } score [1, 2] pos 0.000 vel -0.623 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:41Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 1.091667 } score [1, 2] pos 0.000 vel -0.623 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:42Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:42Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:42Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 1.4500052 }
+[2026-11-03T09:42:42Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 1.5958405 } score [1, 2] pos 0.000 vel -0.623 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:42Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.49583304 } score [1, 2] pos 0.075 vel 0.000 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:43Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.9999992 } score [1, 2] pos 0.075 vel 0.000 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:43Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 1.5041726 } score [1, 2] pos 0.075 vel 0.000 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:43Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:43Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:43Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 1.5916737 }
+[2026-11-03T09:42:43Z INFO  1d_pong::app] Serve { side: Left }
+[2026-11-03T09:42:44Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.248 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:44Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.460 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:45Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.672 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:45Z INFO  1d_pong::app] Whiff { side: Right }
+[2026-11-03T09:42:45Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.883 vel 0.420 rally 0 lockout [0.0, 0.13250017] zones 0.150/0.138
+[2026-11-03T09:42:45Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.46686202 }
+[2026-11-03T09:42:46Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.786 vel -0.467 rally 1 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:46Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.552 vel -0.467 rally 1 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:47Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.319 vel -0.467 rally 1 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:47Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.084 vel -0.467 rally 1 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:47Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:47Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:47Z DEBUG 1d_pong::app] press Left pos 0.016 depth 0.897 phase Rally
+[2026-11-03T09:42:47Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.58298385 }
+[2026-11-03T09:42:48Z DEBUG 1d_pong] pad GamepadId(1) button West
+[2026-11-03T09:42:48Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:48Z DEBUG 1d_pong::app] press Left pos 0.018 depth 0.880 phase Rally
+[2026-11-03T09:42:48Z INFO  1d_pong::app] Whiff { side: Left }
+[2026-11-03T09:42:48Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.186 vel 0.583 rally 2 lockout [0.032500125, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:48Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.477 vel 0.583 rally 2 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:49Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.771 vel 0.583 rally 2 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:49Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.6362419 }
+[2026-11-03T09:42:49Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.822 vel -0.636 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:50Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.501 vel -0.636 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:50Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 2] pos 0.183 vel -0.636 rally 3 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:42:51Z INFO  1d_pong::app] Point { winner: Right, score: [1, 3], rally: 3 }
+[2026-11-03T09:42:51Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:51Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:51Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.0 }
+[2026-11-03T09:42:51Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.06666667 } score [1, 3] pos 0.000 vel -0.636 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:51Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:51Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:51Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.4999997 }
+[2026-11-03T09:42:51Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.57083297 } score [1, 3] pos 0.000 vel -0.636 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:52Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 1.0750002 } score [1, 3] pos 0.000 vel -0.636 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:52Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:52Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:52Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 1.166668 }
+[2026-11-03T09:42:52Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 1.5791736 } score [1, 3] pos 0.000 vel -0.636 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:53Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.4791664 } score [1, 3] pos 0.075 vel 0.000 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:53Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:53Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:53Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 0.5791663 }
+[2026-11-03T09:42:53Z INFO  1d_pong::app] Serve { side: Left }
+[2026-11-03T09:42:53Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.245 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:54Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.456 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:54Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.668 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:55Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.878 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:55Z INFO  1d_pong::app] Hit { side: Right, grade: Great, speed: 0.49379632 }
+[2026-11-03T09:42:55Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.849 vel -0.494 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:56Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.600 vel -0.494 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:56Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.351 vel -0.494 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:57Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.104 vel -0.494 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:57Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:42:57Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:42:57Z DEBUG 1d_pong::app] press Left pos 0.011 depth 0.924 phase Rally
+[2026-11-03T09:42:57Z INFO  1d_pong::app] Hit { side: Left, grade: Smash, speed: 0.6708292 }
+[2026-11-03T09:42:57Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.148 vel 0.671 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:58Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.487 vel 0.671 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:58Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.825 vel 0.671 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:59Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.72464126 }
+[2026-11-03T09:42:59Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.731 vel -0.725 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:42:59Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.366 vel -0.725 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:00Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:00Z DEBUG 1d_pong::app] press Left pos 0.012 depth 0.917 phase Rally
+[2026-11-03T09:43:00Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.9028445 }
+[2026-11-03T09:43:00Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.016 vel 0.903 rally 4 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:00Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.419 vel 0.903 rally 4 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:01Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.874 vel 0.903 rally 4 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:01Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 1.0221052 }
+[2026-11-03T09:43:01Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.578 vel -1.022 rally 5 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:02Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 3] pos 0.062 vel -1.022 rally 5 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:02Z INFO  1d_pong::app] Point { winner: Right, score: [1, 4], rally: 5 }
+[2026-11-03T09:43:02Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:02Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:02Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.0 }
+[2026-11-03T09:43:02Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.2999999 } score [1, 4] pos 0.000 vel -1.022 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:03Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:03Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:03Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.49166638 }
+[2026-11-03T09:43:03Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.7999994 } score [1, 4] pos 0.000 vel -1.022 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:03Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:03Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:03Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 1.016666 }
+[2026-11-03T09:43:03Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 1.3041699 } score [1, 4] pos 0.000 vel -1.022 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:04Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:04Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:04Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 0.004166667 }
+[2026-11-03T09:43:04Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.20416664 } score [1, 4] pos 0.075 vel 0.000 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:04Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.70833284 } score [1, 4] pos 0.075 vel 0.000 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:04Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:04Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:04Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 0.71666616 }
+[2026-11-03T09:43:04Z INFO  1d_pong::app] Serve { side: Left }
+[2026-11-03T09:43:05Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.283 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:05Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.495 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:06Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.707 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:06Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.917 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:07Z INFO  1d_pong::app] Hit { side: Right, grade: Smash, speed: 0.5846484 }
+[2026-11-03T09:43:07Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.885 vel -0.585 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:07Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.592 vel -0.585 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:08Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.297 vel -0.585 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:08Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:08Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:08Z DEBUG 1d_pong::app] press Left pos 0.124 depth 0.170 phase Rally
+[2026-11-03T09:43:08Z INFO  1d_pong::app] Hit { side: Left, grade: Early, speed: 0.5479168 }
+[2026-11-03T09:43:08Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.223 vel 0.548 rally 2 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:09Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.499 vel 0.548 rally 2 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:09Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.773 vel 0.548 rally 2 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:10Z INFO  1d_pong::app] Hit { side: Right, grade: Great, speed: 0.6431216 }
+[2026-11-03T09:43:10Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.918 vel -0.643 rally 3 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:10Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.594 vel -0.643 rally 3 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:11Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.270 vel -0.643 rally 3 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:11Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:11Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:11Z DEBUG 1d_pong::app] press Left pos 0.053 depth 0.649 phase Rally
+[2026-11-03T09:43:11Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.730404 }
+[2026-11-03T09:43:11Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.144 vel 0.730 rally 4 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:12Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.509 vel 0.730 rally 4 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:12Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.877 vel 0.730 rally 4 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:13Z INFO  1d_pong::app] Hit { side: Right, grade: Great, speed: 0.90039706 }
+[2026-11-03T09:43:13Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.728 vel -0.900 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:13Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.278 vel -0.900 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:14Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:14Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:14Z DEBUG 1d_pong::app] press Left pos 0.072 depth 0.523 phase Rally
+[2026-11-03T09:43:14Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.9689274 }
+[2026-11-03T09:43:14Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.294 vel 0.969 rally 6 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:14Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 4] pos 0.778 vel 0.969 rally 6 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:15Z INFO  1d_pong::app] Whiff { side: Right }
+[2026-11-03T09:43:15Z INFO  1d_pong::app] Point { winner: Left, score: [2, 4], rally: 6 }
+[2026-11-03T09:43:15Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.13333337 } score [2, 4] pos 1.000 vel 0.969 rally 6 lockout [0.0, 0.06166679] zones 0.150/0.126
+[2026-11-03T09:43:15Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.6333329 } score [2, 4] pos 1.000 vel 0.969 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:16Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 1.137501 } score [2, 4] pos 1.000 vel 0.969 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:17Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.0375 } score [2, 4] pos 0.937 vel 0.000 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:17Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.53749967 } score [2, 4] pos 0.937 vel 0.000 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:18Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 1.0374997 } score [2, 4] pos 0.937 vel 0.000 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:18Z INFO  1d_pong::app] Serve { side: Right }
+[2026-11-03T09:43:18Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.822 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:19Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.610 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:19Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.400 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:20Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.190 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:20Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:20Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:20Z DEBUG 1d_pong::app] press Left pos 0.062 depth 0.587 phase Rally
+[2026-11-03T09:43:20Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.47128507 }
+[2026-11-03T09:43:20Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.137 vel 0.471 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:21Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.372 vel 0.471 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:21Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.610 vel 0.471 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:22Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.846 vel 0.471 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:22Z INFO  1d_pong::app] Hit { side: Right, grade: Great, speed: 0.5542984 }
+[2026-11-03T09:43:22Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.866 vel -0.554 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:23Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.589 vel -0.554 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:23Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.312 vel -0.554 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:24Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.032 vel -0.554 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:24Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:24Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:24Z DEBUG 1d_pong::app] press Left pos 0.007 depth 0.955 phase Rally
+[2026-11-03T09:43:24Z INFO  1d_pong::app] Hit { side: Left, grade: Smash, speed: 0.7582579 }
+[2026-11-03T09:43:24Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.269 vel 0.758 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:25Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.648 vel 0.758 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:25Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.85576457 }
+[2026-11-03T09:43:25Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.908 vel -0.856 rally 4 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:26Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.480 vel -0.856 rally 4 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:26Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.053 vel -0.856 rally 4 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:26Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:26Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:26Z DEBUG 1d_pong::app] press Left pos 0.024 depth 0.840 phase Rally
+[2026-11-03T09:43:26Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 1.0357546 }
+[2026-11-03T09:43:27Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.438 vel 1.036 rally 5 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:27Z INFO  1d_pong::app] Hit { side: Right, grade: Early, speed: 1.0197526 }
+[2026-11-03T09:43:27Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.900 vel -1.020 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:28Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.390 vel -1.020 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:28Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:28Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:28Z DEBUG 1d_pong::app] press Left pos 0.050 depth 0.663 phase Rally
+[2026-11-03T09:43:28Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 1.1557571 }
+[2026-11-03T09:43:28Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.195 vel 1.156 rally 7 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:29Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.773 vel 1.156 rally 7 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:29Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 1.2639465 }
+[2026-11-03T09:43:29Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.551 vel -1.264 rally 8 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:29Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:29Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:29Z DEBUG 1d_pong::app] press Left pos 0.030 depth 0.801 phase Rally
+[2026-11-03T09:43:29Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 1.5020072 }
+[2026-11-03T09:43:30Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.061 vel 1.502 rally 9 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:30Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.812 vel 1.502 rally 9 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:30Z INFO  1d_pong::app] Hit { side: Right, grade: Early, speed: 1.4369007 }
+[2026-11-03T09:43:31Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.319 vel -1.437 rally 10 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:31Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:31Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:31Z DEBUG 1d_pong::app] press Left pos 0.020 depth 0.867 phase Rally
+[2026-11-03T09:43:31Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 1.7453899 }
+[2026-11-03T09:43:31Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.413 vel 1.745 rally 11 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:31Z INFO  1d_pong::app] Hit { side: Right, grade: Early, speed: 1.5470662 }
+[2026-11-03T09:43:32Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.576 vel -1.547 rally 12 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:32Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:32Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:32Z DEBUG 1d_pong::app] press Left pos 0.034 depth 0.770 phase Rally
+[2026-11-03T09:43:32Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 1.8150911 }
+[2026-11-03T09:43:32Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.193 vel 1.815 rally 13 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:32Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 2.0425587 }
+[2026-11-03T09:43:33Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 4] pos 0.881 vel -2.043 rally 14 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:43:33Z INFO  1d_pong::app] Point { winner: Right, score: [2, 5], rally: 14 }
+[2026-11-03T09:43:33Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.0 } score [2, 5] pos 0.000 vel -2.043 rally 14 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:33Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:33Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:33Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.0 }
+[2026-11-03T09:43:34Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.42916644 } score [2, 5] pos 0.000 vel -2.043 rally 14 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:34Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.9333326 } score [2, 5] pos 0.000 vel -2.043 rally 14 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:35Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 1.4333383 } score [2, 5] pos 0.000 vel -2.043 rally 14 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:35Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.3333332 } score [2, 5] pos 0.075 vel 0.000 rally 14 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:36Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.8374994 } score [2, 5] pos 0.075 vel 0.000 rally 14 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:36Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:36Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:36Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 0.8583327 }
+[2026-11-03T09:43:36Z INFO  1d_pong::app] Serve { side: Left }
+[2026-11-03T09:43:36Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 5] pos 0.276 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:37Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 5] pos 0.486 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:37Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 5] pos 0.696 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:38Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 5] pos 0.908 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:38Z INFO  1d_pong::app] Hit { side: Right, grade: Smash, speed: 0.5738169 }
+[2026-11-03T09:43:38Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 5] pos 0.884 vel -0.574 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:39Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 5] pos 0.595 vel -0.574 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:39Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 5] pos 0.306 vel -0.574 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:40Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 5] pos 0.017 vel -0.574 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:40Z INFO  1d_pong::app] Point { winner: Right, score: [2, 6], rally: 1 }
+[2026-11-03T09:43:40Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:40Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:40Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.0 }
+[2026-11-03T09:43:40Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.32916653 } score [2, 6] pos 0.000 vel -0.574 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:40Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:40Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:40Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.7541661 }
+[2026-11-03T09:43:41Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.82916605 } score [2, 6] pos 0.000 vel -0.574 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:41Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 1.333337 } score [2, 6] pos 0.000 vel -0.574 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:42Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.23749994 } score [2, 6] pos 0.075 vel 0.000 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:42Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.7374995 } score [2, 6] pos 0.075 vel 0.000 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:43Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 1.241669 } score [2, 6] pos 0.075 vel 0.000 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:43Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:43Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:43Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 1.3416704 }
+[2026-11-03T09:43:43Z INFO  1d_pong::app] Serve { side: Left }
+[2026-11-03T09:43:43Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.245 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:44Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.456 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:44Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.666 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:45Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.878 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:45Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.48496312 }
+[2026-11-03T09:43:45Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.842 vel -0.485 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:46Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.600 vel -0.485 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:46Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.356 vel -0.485 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:47Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.111 vel -0.485 rally 1 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:47Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:47Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:47Z DEBUG 1d_pong::app] press Left pos 0.046 depth 0.691 phase Rally
+[2026-11-03T09:43:47Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.5631258 }
+[2026-11-03T09:43:47Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.232 vel 0.563 rally 2 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:48Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.513 vel 0.563 rally 2 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:48Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.797 vel 0.563 rally 2 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:48Z INFO  1d_pong::app] Hit { side: Right, grade: Early, speed: 0.54258686 }
+[2026-11-03T09:43:49Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.784 vel -0.543 rally 3 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:49Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.512 vel -0.543 rally 3 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:50Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.239 vel -0.543 rally 3 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:50Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:50Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:50Z DEBUG 1d_pong::app] press Left pos 0.033 depth 0.780 phase Rally
+[2026-11-03T09:43:50Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.6484632 }
+[2026-11-03T09:43:50Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.068 vel 0.648 rally 4 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:51Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.392 vel 0.648 rally 4 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:51Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.719 vel 0.648 rally 4 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:51Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.6598038 }
+[2026-11-03T09:43:52Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.850 vel -0.660 rally 5 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:52Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.520 vel -0.660 rally 5 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:53Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.188 vel -0.660 rally 5 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:53Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:53Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:53Z DEBUG 1d_pong::app] press Left pos 0.047 depth 0.683 phase Rally
+[2026-11-03T09:43:53Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.7586033 }
+[2026-11-03T09:43:53Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.237 vel 0.759 rally 6 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:54Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [2, 6] pos 0.620 vel 0.759 rally 6 lockout [0.0, 0.0] zones 0.150/0.102
+[2026-11-03T09:43:54Z INFO  1d_pong::app] Whiff { side: Right }
+[2026-11-03T09:43:54Z INFO  1d_pong::app] Point { winner: Left, score: [3, 6], rally: 6 }
+[2026-11-03T09:43:54Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.0 } score [3, 6] pos 1.000 vel 0.759 rally 6 lockout [0.0, 0.17000014] zones 0.150/0.114
+[2026-11-03T09:43:54Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:54Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:54Z DEBUG 1d_pong::app] press Left pos 1.000 depth -5.667 phase Point { winner: Left, t: 0.0 }
+[2026-11-03T09:43:55Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.36249983 } score [3, 6] pos 1.000 vel 0.759 rally 6 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:55Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.86249936 } score [3, 6] pos 1.000 vel 0.759 rally 6 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:56Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 1.3666707 } score [3, 6] pos 1.000 vel 0.759 rally 6 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:56Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.27083325 } score [3, 6] pos 0.943 vel 0.000 rally 6 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:57Z INFO  1d_pong::app] Serve { side: Right }
+[2026-11-03T09:43:57Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.905 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:57Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.693 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:58Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.481 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:58Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.269 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:59Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:43:59Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:43:59Z DEBUG 1d_pong::app] press Left pos 0.073 depth 0.512 phase Rally
+[2026-11-03T09:43:59Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.458055 }
+[2026-11-03T09:43:59Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.075 vel 0.458 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:43:59Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.300 vel 0.458 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:00Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.531 vel 0.458 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:00Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.762 vel 0.458 rally 1 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:01Z INFO  1d_pong::app] Hit { side: Right, grade: Early, speed: 0.46146154 }
+[2026-11-03T09:44:01Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.867 vel -0.461 rally 2 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:01Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.636 vel -0.461 rally 2 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:02Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.403 vel -0.461 rally 2 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:02Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.171 vel -0.461 rally 2 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:02Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:02Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:02Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.503 phase Rally
+[2026-11-03T09:44:02Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.5000301 }
+[2026-11-03T09:44:03Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.200 vel 0.500 rally 3 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:03Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.452 vel 0.500 rally 3 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:04Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.704 vel 0.500 rally 3 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:04Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.954 vel 0.500 rally 3 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:04Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.5600017 }
+[2026-11-03T09:44:05Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.697 vel -0.560 rally 4 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:05Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.417 vel -0.560 rally 4 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:06Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.135 vel -0.560 rally 4 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:06Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:06Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:06Z DEBUG 1d_pong::app] press Left pos 0.023 depth 0.848 phase Rally
+[2026-11-03T09:44:06Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.6847944 }
+[2026-11-03T09:44:06Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.185 vel 0.685 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:07Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.528 vel 0.685 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:07Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.870 vel 0.685 rally 5 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:07Z INFO  1d_pong::app] Hit { side: Right, grade: Great, speed: 0.8169004 }
+[2026-11-03T09:44:08Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.744 vel -0.817 rally 6 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:08Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.333 vel -0.817 rally 6 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:09Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:09Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:09Z DEBUG 1d_pong::app] press Left pos 0.067 depth 0.553 phase Rally
+[2026-11-03T09:44:09Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.89093566 }
+[2026-11-03T09:44:09Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.190 vel 0.891 rally 7 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:09Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.639 vel 0.891 rally 7 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:10Z INFO  1d_pong::app] Hit { side: Right, grade: Early, speed: 0.8534458 }
+[2026-11-03T09:44:10Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.775 vel -0.853 rally 8 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:10Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.344 vel -0.853 rally 8 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:11Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:11Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:11Z DEBUG 1d_pong::app] press Left pos 0.014 depth 0.908 phase Rally
+[2026-11-03T09:44:11Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 1.0574481 }
+[2026-11-03T09:44:11Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.067 vel 1.057 rally 9 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:11Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [3, 6] pos 0.600 vel 1.057 rally 9 lockout [0.0, 0.0] zones 0.150/0.114
+[2026-11-03T09:44:12Z INFO  1d_pong::app] Point { winner: Left, score: [4, 6], rally: 9 }
+[2026-11-03T09:44:12Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.0 } score [4, 6] pos 1.000 vel 1.057 rally 9 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:12Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.48333305 } score [4, 6] pos 1.000 vel 1.057 rally 9 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:13Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.9833326 } score [4, 6] pos 1.000 vel 1.057 rally 9 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:13Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 1.4875057 } score [4, 6] pos 1.000 vel 1.057 rally 9 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:14Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.39166647 } score [4, 6] pos 0.937 vel 0.000 rally 9 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:14Z INFO  1d_pong::app] Serve { side: Right }
+[2026-11-03T09:44:14Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.921 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:15Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.711 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:15Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.501 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:16Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.290 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:16Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.080 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:16Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:16Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:16Z DEBUG 1d_pong::app] press Left pos 0.057 depth 0.622 phase Rally
+[2026-11-03T09:44:16Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.47745904 }
+[2026-11-03T09:44:17Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.252 vel 0.477 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:17Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.492 vel 0.477 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:18Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.731 vel 0.477 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:18Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.972 vel 0.477 rally 1 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:18Z INFO  1d_pong::app] Hit { side: Right, grade: Great, speed: 0.57818675 }
+[2026-11-03T09:44:19Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.728 vel -0.578 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:19Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.436 vel -0.578 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:20Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.147 vel -0.578 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:20Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:20Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:20Z DEBUG 1d_pong::app] press Left pos 0.051 depth 0.662 phase Rally
+[2026-11-03T09:44:20Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.6613236 }
+[2026-11-03T09:44:20Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.246 vel 0.661 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:21Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.577 vel 0.661 rally 3 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:21Z INFO  1d_pong::app] Hit { side: Right, grade: Early, speed: 0.60236126 }
+[2026-11-03T09:44:21Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.886 vel -0.602 rally 4 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:21Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:21Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:21Z DEBUG 1d_pong::app] press Left pos 0.788 depth -4.254 phase Rally
+[2026-11-03T09:44:21Z INFO  1d_pong::app] Whiff { side: Left }
+[2026-11-03T09:44:22Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.587 vel -0.602 rally 4 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:22Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.284 vel -0.602 rally 4 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:23Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:23Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:23Z DEBUG 1d_pong::app] press Left pos 0.138 depth 0.080 phase Rally
+[2026-11-03T09:44:23Z INFO  1d_pong::app] Hit { side: Left, grade: Early, speed: 0.541209 }
+[2026-11-03T09:44:23Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.264 vel 0.541 rally 5 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:23Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.535 vel 0.541 rally 5 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:24Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.805 vel 0.541 rally 5 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:24Z INFO  1d_pong::app] Hit { side: Right, grade: Early, speed: 0.5168988 }
+[2026-11-03T09:44:24Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.745 vel -0.517 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:25Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.485 vel -0.517 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:25Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.224 vel -0.517 rally 6 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:26Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:26Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:26Z DEBUG 1d_pong::app] press Left pos 0.032 depth 0.785 phase Rally
+[2026-11-03T09:44:26Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.6196193 }
+[2026-11-03T09:44:26Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.071 vel 0.620 rally 7 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:26Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.383 vel 0.620 rally 7 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:27Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [4, 6] pos 0.693 vel 0.620 rally 7 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:27Z INFO  1d_pong::app] Whiff { side: Right }
+[2026-11-03T09:44:27Z INFO  1d_pong::app] Point { winner: Left, score: [5, 6], rally: 7 }
+[2026-11-03T09:44:27Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.0 } score [5, 6] pos 1.000 vel 0.620 rally 7 lockout [0.0, 0.08250014] zones 0.150/0.138
+[2026-11-03T09:44:28Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.3666665 } score [5, 6] pos 1.000 vel 0.620 rally 7 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:28Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.8708327 } score [5, 6] pos 1.000 vel 0.620 rally 7 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:29Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 1.3750042 } score [5, 6] pos 1.000 vel 0.620 rally 7 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:29Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.27916658 } score [5, 6] pos 0.931 vel 0.000 rally 7 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:30Z INFO  1d_pong::app] Serve { side: Right }
+[2026-11-03T09:44:30Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.858 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:30Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.646 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:31Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.434 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:31Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.222 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:32Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:32Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:32Z DEBUG 1d_pong::app] press Left pos 0.070 depth 0.533 phase Rally
+[2026-11-03T09:44:32Z INFO  1d_pong::app] Hit { side: Left, grade: Good, speed: 0.46187708 }
+[2026-11-03T09:44:32Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.114 vel 0.462 rally 1 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:32Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.347 vel 0.462 rally 1 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:33Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.578 vel 0.462 rally 1 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:33Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.811 vel 0.462 rally 1 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:34Z INFO  1d_pong::app] Hit { side: Right, grade: Smash, speed: 0.6289746 }
+[2026-11-03T09:44:34Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.987 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:34Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.670 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:35Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.353 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:35Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [5, 6] pos 0.039 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.138
+[2026-11-03T09:44:35Z INFO  1d_pong::app] Point { winner: Right, score: [5, 7], rally: 2 }
+[2026-11-03T09:44:35Z INFO  1d_pong::app] Win { winner: Right, score: [5, 7] }
+[2026-11-03T09:44:35Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:35Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:36Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Over { winner: Right, t: 0.2999999 } score [5, 7] pos 0.000 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:36Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:36Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:36Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Over { winner: Right, t: 0.8041661 } score [5, 7] pos 0.000 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:37Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Over { winner: Right, t: 1.3083366 } score [5, 7] pos 0.000 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:37Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Over { winner: Right, t: 1.8083433 } score [5, 7] pos 0.000 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:38Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Over { winner: Right, t: 2.3125076 } score [5, 7] pos 0.000 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:38Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Over { winner: Right, t: 2.8166666 } score [5, 7] pos 0.000 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:39Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Over { winner: Right, t: 3.316659 } score [5, 7] pos 0.000 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:39Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Over { winner: Right, t: 3.820818 } score [5, 7] pos 0.000 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:40Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Over { winner: Right, t: 4.324977 } score [5, 7] pos 0.000 vel -0.629 rally 2 lockout [0.0, 0.0] zones 0.150/0.126
+[2026-11-03T09:44:40Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:40Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:40Z INFO  1d_pong::app] start match Solo(Easy) to 7
+[2026-11-03T09:44:40Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.05 } score [0, 0] pos 0.925 vel 0.000 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:41Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.54999965 } score [0, 0] pos 0.925 vel 0.000 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:41Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 1.0541666 } score [0, 0] pos 0.925 vel 0.000 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:42Z INFO  1d_pong::app] Serve { side: Right }
+[2026-11-03T09:44:42Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.901 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:42Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.691 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:43Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.479 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:43Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.267 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:44Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.055 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:44Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:44Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:44Z DEBUG 1d_pong::app] press Left pos 0.045 depth 0.702 phase Rally
+[2026-11-03T09:44:44Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.4915711 }
+[2026-11-03T09:44:44Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.248 vel 0.492 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:45Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.493 vel 0.492 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:45Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.741 vel 0.492 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:46Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.5684606 }
+[2026-11-03T09:44:46Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.936 vel -0.568 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:46Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.651 vel -0.568 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:47Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.367 vel -0.568 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:47Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.080 vel -0.568 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:48Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:48Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:48Z DEBUG 1d_pong::app] press Left pos 0.017 depth 0.890 phase Rally
+[2026-11-03T09:44:48Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.70496845 }
+[2026-11-03T09:44:48Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.246 vel 0.705 rally 3 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:48Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.601 vel 0.705 rally 3 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:49Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.72458106 }
+[2026-11-03T09:44:49Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.894 vel -0.725 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:49Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.529 vel -0.725 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:50Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.164 vel -0.725 rally 4 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:50Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:50Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:50Z DEBUG 1d_pong::app] press Left pos 0.013 depth 0.915 phase Rally
+[2026-11-03T09:44:50Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.90198505 }
+[2026-11-03T09:44:50Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.216 vel 0.902 rally 5 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:51Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.671 vel 0.902 rally 5 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:51Z INFO  1d_pong::app] Hit { side: Right, grade: Early, speed: 0.86037076 }
+[2026-11-03T09:44:51Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.680 vel -0.860 rally 6 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:52Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.247 vel -0.860 rally 6 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:52Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:52Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:52Z DEBUG 1d_pong::app] press Left pos 0.042 depth 0.718 phase Rally
+[2026-11-03T09:44:52Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.99721086 }
+[2026-11-03T09:44:52Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.242 vel 0.997 rally 7 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:53Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [0, 0] pos 0.740 vel 0.997 rally 7 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:53Z INFO  1d_pong::app] Point { winner: Left, score: [1, 0], rally: 7 }
+[2026-11-03T09:44:53Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.10000003 } score [1, 0] pos 1.000 vel 0.997 rally 7 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:44:54Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 0.5999996 } score [1, 0] pos 1.000 vel 0.997 rally 7 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:44:54Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Left, t: 1.1041672 } score [1, 0] pos 1.000 vel 0.997 rally 7 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:44:55Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.008333334 } score [1, 0] pos 0.925 vel 0.000 rally 7 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:44:55Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Right, t: 0.508333 } score [1, 0] pos 0.925 vel 0.000 rally 7 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:44:56Z INFO  1d_pong::app] Serve { side: Right }
+[2026-11-03T09:44:56Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.801 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:44:56Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.589 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:44:57Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.379 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:44:57Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 0] pos 0.167 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.138/0.150
+[2026-11-03T09:44:58Z INFO  1d_pong::app] Point { winner: Right, score: [1, 1], rally: 0 }
+[2026-11-03T09:44:58Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:58Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:58Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.0 }
+[2026-11-03T09:44:58Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.0 } score [1, 1] pos 0.000 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:58Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.46249974 } score [1, 1] pos 0.000 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:59Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:59Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:59Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.7333328 }
+[2026-11-03T09:44:59Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:59Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:59Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 0.96249926 }
+[2026-11-03T09:44:59Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 0.96249926 } score [1, 1] pos 0.000 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:44:59Z DEBUG 1d_pong] pad GamepadId(1) button DPadRight
+[2026-11-03T09:44:59Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:59Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 1.1291676 }
+[2026-11-03T09:44:59Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:59Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:59Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 1.1541679 }
+[2026-11-03T09:44:59Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:44:59Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:59Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 1.333337 }
+[2026-11-03T09:44:59Z DEBUG 1d_pong] pad GamepadId(1) button DPadRight
+[2026-11-03T09:44:59Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:44:59Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 1.3666707 }
+[2026-11-03T09:44:59Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Point { winner: Right, t: 1.4666721 } score [1, 1] pos 0.000 vel -0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:00Z DEBUG 1d_pong] pad GamepadId(1) button DPadRight
+[2026-11-03T09:45:00Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:00Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 1.5458398 }
+[2026-11-03T09:45:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:00Z DEBUG 1d_pong::app] press Left pos 0.000 depth 1.000 phase Point { winner: Right, t: 1.5458398 }
+[2026-11-03T09:45:00Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:00Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 0.2083333 }
+[2026-11-03T09:45:00Z DEBUG 1d_pong] pad GamepadId(1) button DPadRight
+[2026-11-03T09:45:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:00Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 0.30833322 }
+[2026-11-03T09:45:00Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Serve { server: Left, t: 0.3666665 } score [1, 1] pos 0.075 vel 0.000 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:00Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:00Z DEBUG 1d_pong::app] press Left pos 0.075 depth 0.500 phase Serve { server: Left, t: 0.4124998 }
+[2026-11-03T09:45:00Z INFO  1d_pong::app] Serve { side: Left }
+[2026-11-03T09:45:00Z DEBUG 1d_pong] pad GamepadId(1) button DPadRight
+[2026-11-03T09:45:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:00Z DEBUG 1d_pong::app] press Left pos 0.133 depth 0.115 phase Rally
+[2026-11-03T09:45:00Z INFO  1d_pong::app] Whiff { side: Left }
+[2026-11-03T09:45:00Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:00Z DEBUG 1d_pong::app] press Left pos 0.157 depth -0.048 phase Rally
+[2026-11-03T09:45:00Z DEBUG 1d_pong] pad GamepadId(1) button DPadRight
+[2026-11-03T09:45:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:00Z DEBUG 1d_pong::app] press Left pos 0.222 depth -0.480 phase Rally
+[2026-11-03T09:45:00Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:00Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:00Z DEBUG 1d_pong::app] press Left pos 0.234 depth -0.562 phase Rally
+[2026-11-03T09:45:00Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.268 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:01Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.477 vel 0.420 rally 0 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:01Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:01Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:01Z DEBUG 1d_pong::app] press Left pos 0.610 depth -3.070 phase Rally
+[2026-11-03T09:45:01Z INFO  1d_pong::app] Whiff { side: Left }
+[2026-11-03T09:45:01Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.689 vel 0.420 rally 0 lockout [0.13250017, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:02Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:02Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:02Z DEBUG 1d_pong::app] press Left pos 0.763 depth -4.085 phase Rally
+[2026-11-03T09:45:02Z INFO  1d_pong::app] Whiff { side: Left }
+[2026-11-03T09:45:02Z INFO  1d_pong::app] Whiff { side: Right }
+[2026-11-03T09:45:02Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:02Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:02Z DEBUG 1d_pong::app] press Left pos 0.840 depth -4.598 phase Rally
+[2026-11-03T09:45:02Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.901 vel 0.420 rally 0 lockout [0.0, 0.04916679] zones 0.150/0.150
+[2026-11-03T09:45:02Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:02Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:02Z DEBUG 1d_pong::app] press Left pos 0.920 depth -5.135 phase Rally
+[2026-11-03T09:45:02Z INFO  1d_pong::app] Whiff { side: Left }
+[2026-11-03T09:45:02Z INFO  1d_pong::app] Hit { side: Right, grade: Good, speed: 0.4524691 }
+[2026-11-03T09:45:03Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.737 vel -0.452 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:03Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.509 vel -0.452 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:04Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.283 vel -0.452 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:04Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.057 vel -0.452 rally 1 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:04Z DEBUG 1d_pong] pad GamepadId(1) button South
+[2026-11-03T09:45:04Z DEBUG 1d_pong] cmd Hit(Left)
+[2026-11-03T09:45:04Z DEBUG 1d_pong::app] press Left pos 0.040 depth 0.735 phase Rally
+[2026-11-03T09:45:04Z INFO  1d_pong::app] Hit { side: Left, grade: Great, speed: 0.53484005 }
+[2026-11-03T09:45:05Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.251 vel 0.535 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:05Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.521 vel 0.535 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:06Z DEBUG 1d_pong] snapshot play Solo(Easy) unfold 4 reveal None paused false phase Rally score [1, 1] pos 0.791 vel 0.535 rally 2 lockout [0.0, 0.0] zones 0.150/0.150
+[2026-11-03T09:45:06Z DEBUG 1d_pong] key Esc Press KeyModifiers(0x0)
+[2026-11-03T09:45:06Z DEBUG 1d_pong] cmd Back

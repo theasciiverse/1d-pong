@@ -63,11 +63,11 @@ and is remembered (`unfold` in the state file):
 | 2 | the first point | small scores at the ends of the line |
 | 3 | the first rally of 5 | the ball's trail |
 | 4 | your first smash, or a rally of 10 | hit stop, sparks, hit grades, shake |
-| 5 | your first win | big scores, rally meter, title and menu, two players and watch |
+| 5 | your first win, or three matches played | big scores, rally meter, title and menu, two players and watch |
 | 6 | a win on Hard | the King of Lineland, picked for you |
 | 7 | beating the King | the line opens into a plane for a moment: "upward, not northward" |
 
-Before level 5 a finished match starts the next by itself and ESC leaves. `--unfold N` (or `all`)
+Before level 5 matches are first to 3, a finished match starts the next by itself and ESC leaves. `--unfold N` (or `all`)
 sets the level and shows its moment again; `--unfold 0` starts over. The computer playing
 itself unfolds nothing.
 

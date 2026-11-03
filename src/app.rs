@@ -55,6 +55,12 @@ pub mod level {
 /// Before the full game unfolds, a finished match starts the next by
 /// itself after this.
 const BARE_RESTART: f32 = 5.0;
+/// Before the full game unfolds, matches are this short, so the first
+/// win (and with it the whole game) comes soon.
+const BARE_TARGET: u8 = 3;
+/// The whole game also unfolds after this many bare matches, won or not,
+/// so nobody is stuck on the line.
+const BARE_MATCHES: u8 = 3;
 
 /// The fixed simulation step.
 pub const DT: f32 = 1.0 / 240.0;
@@ -282,6 +288,8 @@ pub struct App {
     pub reveal: Option<(u8, f32)>,
     /// whether the player has pressed anything yet this run
     pub hinted: bool,
+    /// bare matches finished this run
+    pub bare_played: u8,
 }
 
 impl App {
@@ -303,11 +311,21 @@ impl App {
             quit: false,
             reveal: None,
             hinted: false,
+            bare_played: 0,
         }
     }
 
     pub fn unfold(&self) -> u8 {
         self.store.unfold
+    }
+
+    /// Points to win a match: short until the whole game has unfolded.
+    pub fn match_target(&self) -> u8 {
+        if self.unfold() < level::FULL {
+            self.target.min(BARE_TARGET)
+        } else {
+            self.target
+        }
     }
 
     /// Sounds only once sound has unfolded.
@@ -344,14 +362,15 @@ impl App {
     }
 
     pub fn start(&mut self, mode: Mode) {
-        log::info!("start match {mode:?} to {}", self.target);
+        let target = self.match_target();
+        log::info!("start match {mode:?} to {target}");
         if let Mode::Solo(skill) = mode {
             if self.unfold() >= level::FULL {
                 self.store.skill = Some(skill.key().to_string());
                 self.store.save();
             }
         }
-        self.play = Some(Match::new(mode, self.target, &mut self.rng));
+        self.play = Some(Match::new(mode, target, &mut self.rng));
         self.screen = Screen::Play;
         self.paused = false;
         self.sound(Sound::Serve);
@@ -392,13 +411,14 @@ impl App {
             return;
         }
         let bare = self.unfold() < level::FULL;
+        let target = self.match_target();
         let Some(m) = self.play.as_mut() else { return };
         m.step(impact);
         let restart = if m.mode == Mode::Watch { DEMO_RESTART } else if bare { BARE_RESTART } else { f32::INFINITY };
         if m.over_for().is_some_and(|t| t > restart) {
             let mode = m.mode;
-            *m = Match::new(mode, self.target, &mut self.rng);
-            log::info!("next match {mode:?}");
+            *m = Match::new(mode, target, &mut self.rng);
+            log::info!("next match {mode:?} to {target}");
         }
         let events = m.game.take_events();
         m.react(&events, impact);
@@ -461,6 +481,12 @@ impl App {
                 };
                 if human_won {
                     unlocks.push(level::FULL);
+                }
+                if m.mode != Mode::Watch && self.store.unfold < level::FULL {
+                    self.bare_played += 1;
+                    if self.bare_played >= BARE_MATCHES {
+                        unlocks.push(level::FULL);
+                    }
                 }
                 if m.mode == Mode::Solo(Skill::Hard) && human_won {
                     unlocks.push(level::KING);
@@ -613,6 +639,22 @@ mod tests {
         app.on_event(Event::Point { winner: Side::Left, score: [1, 0], rally: 12 });
         app.on_event(Event::Win { winner: Side::Left, score: [7, 0] });
         assert_eq!(app.unfold(), level::BARE);
+    }
+
+    #[test]
+    fn bare_matches_are_short_and_three_of_them_unfold_the_game() {
+        let mut app = fresh();
+        app.store.unfold = level::IMPACT;
+        app.start(Mode::Solo(Skill::Easy));
+        assert_eq!(app.play.as_ref().unwrap().game.target, 3);
+        for _ in 0..2 {
+            app.on_event(Event::Win { winner: Side::Right, score: [1, 3] });
+            assert_eq!(app.unfold(), level::IMPACT);
+        }
+        app.on_event(Event::Win { winner: Side::Right, score: [2, 3] });
+        assert_eq!(app.unfold(), level::FULL);
+        app.start(Mode::Solo(Skill::Easy));
+        assert_eq!(app.play.as_ref().unwrap().game.target, 7);
     }
 
     #[test]
