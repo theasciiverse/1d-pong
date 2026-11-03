@@ -1,3 +1,4 @@
+# Asciiverse release workflow (tag v* or run by hand with a tag)
 # Builds 1D-Pong for the Asciiverse catalog: one archive per target,
 # named <id>-<target>.tar.gz (Linux, macOS) or .zip (Windows), plus a
 # SHA256SUMS file, attached to a GitHub release (hub/catalog/SCHEMA.md,
